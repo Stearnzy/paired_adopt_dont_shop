@@ -19,8 +19,13 @@ describe "As a visitor" do
       expect(page).to have_content("#{shelter.city}")
       expect(page).to have_content("#{shelter.state}")
       expect(page).to have_content("#{shelter.zip}")
+    end
 
-      expect(page).to have_link("Edit")
+    it "I see a link to update the shelter" do
+      expect(page).to have_link("Update Shelter")
+    end
+
+    it "I see a link to delete the shelter" do
       expect(page).to have_button("Delete")
     end
   end
