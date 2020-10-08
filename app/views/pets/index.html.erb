@@ -1,0 +1,10 @@
+<h1>Furry Friends Needing a Home</h1>
+
+<% @pets.each do |pet| %>
+  <h3><%= pet.name %></h3>
+  <img src="<%= pet.image %>" alt="<% pet.name %>">
+  <p>Age: <%= pet.age %><br>
+    Sex: <%= pet.sex %><br>
+    Current shelter: <%= pet.shelter %>
+  </p>
+<% end %>
