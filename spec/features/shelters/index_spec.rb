@@ -26,6 +26,8 @@ describe "As a visitor" do
     end
 
     it "I see a link to create a new shelter" do
+      visit '/shelters'
+      
       expect(page).to have_link("New Shelter")
     end
   end
