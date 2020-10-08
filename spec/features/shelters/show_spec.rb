@@ -22,10 +22,28 @@ describe "As a visitor" do
     end
 
     it "I see a link to update the shelter" do
+      shelter = Shelter.create({
+            name: "Crazy Cat Lady's",
+            address: "123 Litterbox Way",
+            city: "Littleton",
+            state: "CO",
+            zip: "80110"
+        })
+      visit "/shelters/#{shelter.id}"
+
       expect(page).to have_link("Update Shelter")
     end
 
     it "I see a link to delete the shelter" do
+      shelter = Shelter.create({
+            name: "Crazy Cat Lady's",
+            address: "123 Litterbox Way",
+            city: "Littleton",
+            state: "CO",
+            zip: "80110"
+        })
+      visit "/shelters/#{shelter.id}"
+
       expect(page).to have_button("Delete")
     end
   end
