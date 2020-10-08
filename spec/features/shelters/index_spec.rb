@@ -21,8 +21,11 @@ describe "As a visitor" do
       visit '/shelters'
 
       expect(page).to have_content("Our Family of Shelters")
-      expect(page).to have_link("#{shelter_1.name}")
-      expect(page).to have_link("#{shelter_2.name}")
+      expect(page).to have_content("#{shelter_1.name}")
+      expect(page).to have_content("#{shelter_2.name}")
+    end
+
+    it "I see a link to create a new shelter" do
       expect(page).to have_link("New Shelter")
     end
   end
