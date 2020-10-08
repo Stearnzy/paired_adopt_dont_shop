@@ -15,6 +15,8 @@ describe "As a visitor" do
 
       visit '/pets'
 
+      expect(page).to have_content("Furry Friends Needing a Home")
+
       expect(page).to have_content("https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg")
       expect(page).to have_content("Guiness")
       expect(page).to have_content(3)
