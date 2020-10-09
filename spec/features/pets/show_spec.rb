@@ -23,5 +23,3 @@ describe "As a visitor" do
     end
   end
 end
-
-MUST ADD STATUS TO DATABASE TABLE AND TEST ABOVE!!!!
