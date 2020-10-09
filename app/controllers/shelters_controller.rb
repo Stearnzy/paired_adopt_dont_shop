@@ -51,7 +51,5 @@ class SheltersController < ApplicationController
 # Model joining complete
   def pets
     # pets = Pets.find(params[@shelter.id])
-    require "pry"; binding.pry
-
   end
 end
