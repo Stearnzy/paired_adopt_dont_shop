@@ -26,7 +26,7 @@ describe "As a visitor" do
           name: "Garfield",
           age: 5,
           sex: "male",
-          shelter: "Crazy Cat Lady's"
+          current_shelter: "Crazy Cat Lady's"
           })
 
         pet_2 = Pet.create({
@@ -34,7 +34,7 @@ describe "As a visitor" do
           name: "Guiness",
           age: 3,
           sex: "male",
-          shelter: "Dog's Haven"
+          current_shelter: "Dog's Haven"
           })
 
 

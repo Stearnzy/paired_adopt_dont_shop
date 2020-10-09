@@ -10,7 +10,7 @@ describe "As a visitor" do
         name: "Guiness",
         age: 3,
         sex: "male",
-        shelter: "Dog's Haven"
+        current_shelter: "Dog's Haven"
         })
 
       visit '/pets'
