@@ -9,7 +9,7 @@ describe "As a visitor" do
         name: "Guiness",
         age: 3,
         sex: "male",
-        shelter: "Dog's Haven"
+        current_shelter: "Dog's Haven"
         })
 
       visit "/pets/#{pet_1.id}"
@@ -18,7 +18,7 @@ describe "As a visitor" do
       expect(page).to have_content("#{pet_1.image}")
       expect(page).to have_content("#{pet_1.age}")
       expect(page).to have_content("#{pet_1.sex}")
-      expect(page).to have_content("#{pet_1.shelter}")
+      expect(page).to have_content("#{pet_1.current_shelter}")
       expect(page).to have_content("#{pet_1.status}")
     end
   end
