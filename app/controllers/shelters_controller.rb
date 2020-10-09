@@ -48,8 +48,8 @@ class SheltersController < ApplicationController
     redirect_to '/shelters'
   end
 
-# Model joining complete
   def pets
-    # pets = Pets.find(params[@shelter.id])
+    shelter = Shelter.find(params[:id])
+    @pets = shelter.pets
   end
 end
