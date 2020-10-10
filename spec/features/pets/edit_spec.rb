@@ -37,7 +37,7 @@ describe "As a visitor" do
         expect(find_field('pet[image]').value).to eq("https://media.angieslist.com/s3fs-public/styles/widescreen_large/public/parakeet.jpeg?itok=2pMpm55J")
         expect(find_field('pet[name]').value).to eq("Perry")
         expect(find_field('pet[description]').value).to eq("Beautiful golden bird, ready to party!")
-        expect(find_field('pet[age]').value).to eq(7)
+        expect(find_field('pet[age]').value).to eq("7")
         expect(find_field('pet[sex]').value).to eq("Female")
         expect(page).to have_button("Submit")
 
@@ -47,6 +47,5 @@ describe "As a visitor" do
         click_button("Submit")
         expect(current_path).to eq("/pets/#{@pet.id}")
     end
-
   end
 end
