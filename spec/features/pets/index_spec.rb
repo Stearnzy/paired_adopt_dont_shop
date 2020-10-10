@@ -29,7 +29,7 @@ describe "As a visitor" do
       expect(page).to have_content("#{pet_1.name}")
       expect(page).to have_content("#{pet_1.age}")
       expect(page).to have_content("#{pet_1.sex}")
-      expect(page).to have_content("#{pet_1.current_shelter}")
+      expect(page).to have_content("#{shelter.name}")
     end
   end
 end
