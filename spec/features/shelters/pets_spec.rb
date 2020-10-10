@@ -46,9 +46,6 @@ describe "As a visitor" do
       expect(page).to have_content("#{pet_1.name}")
       expect(page).to have_content(pet_1.age)
       expect(page).to have_content("#{pet_1.sex}")
-
-      # expect(page).to have_link("Return to #{shelter_1.name}")
-      # expect(page).to have_link("Return to Shelters Home")
     end
   end
 end
