@@ -18,9 +18,7 @@ describe "As a visitor" do
         name: "Guiness",
         age: 3,
         sex: "male",
-        current_shelter: "#{shelter.name}",
         shelter_id: "#{shelter.id}",
-        status: "adoptable"
       })
 
         visit '/pets'
