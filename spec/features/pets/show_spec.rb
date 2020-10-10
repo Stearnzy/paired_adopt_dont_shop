@@ -24,7 +24,7 @@ describe "As a visitor" do
         })
 
       visit "/pets/#{@pet_1.id}"
-# require "pry"; binding.pry
+
       expect(page).to have_content("#{@pet_1.image}")
       expect(page).to have_content("#{@pet_1.name}")
       expect(page).to have_content("#{@pet_1.description}")
