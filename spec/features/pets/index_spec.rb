@@ -18,6 +18,7 @@ describe "As a visitor" do
         name: "Guiness",
         age: 3,
         sex: "male",
+        description: "description",
         shelter_id: "#{shelter.id}",
       })
 
