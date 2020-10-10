@@ -14,7 +14,7 @@ describe "As a visitor" do
         })
 
 
-      @pet_1 = Pet.create({
+      pet_1 = Pet.create({
         image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
         name: "Guiness",
         description: "Floppy-eared dude ready to play ball!",
@@ -23,14 +23,20 @@ describe "As a visitor" do
         shelter_id: "#{shelter.id}"
         })
 
-      visit "/pets/#{@pet_1.id}"
+      visit "/pets/#{pet_1.id}"
 
-      expect(page).to have_xpath("//img[contains(@src, '#{@pet_1.image}')]")
-      expect(page).to have_content("#{@pet_1.name}")
-      expect(page).to have_content("#{@pet_1.description}")
-      expect(page).to have_content("#{@pet_1.age}")
-      expect(page).to have_content("#{@pet_1.sex}")
+      expect(page).to have_xpath("//img[contains(@src, '#{pet_1.image}')]")
+      expect(page).to have_content("#{pet_1.name}")
+      expect(page).to have_content("#{pet_1.description}")
+      expect(page).to have_content("#{pet_1.age}")
+      expect(page).to have_content("#{pet_1.sex}")
       expect(page).to have_content("Adoptable")
+
+      expect(page).to have_link("Update Pet")
+      click_on "Update Pet"
+      expect(current_path).to eq("/pets/#{pet_1.id}/edit")
     end
+
+
   end
 end
