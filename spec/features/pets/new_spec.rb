@@ -18,15 +18,17 @@ describe "Then I see a link to add a new adoptable pet for the shelter 'Create P
         click_link("Create Pet")
         expect(current_path).to eq("/shelters/#{@shelter.id}/pets/new")
 
-        attach_file("image", "https://frontpagemeews.com/wp-content/uploads/2018/12/lazy-cat-cover-750x517.png")
+        # attach_file("image", "https://frontpagemeews.com/wp-content/uploads/2018/12/lazy-cat-cover-750x517.png")
+        fill_in "image", with: "https://frontpagemeews.com/wp-content/uploads/2018/12/lazy-cat-cover-750x517.png"
         fill_in "name", with: "Opus"
         fill_in "description", with: "He's a quiet guy."
         fill_in "age", with: 7
-        choose('Male')
+        choose(:sex, option: "Male")
 
         click_button 'Create Pet'
 
         expect(current_path).to eq("/shelters/#{@shelter.id}/pets")
+        expect(page).to have_content("Create New Pet:")
         expect(page).to have_xpath("//img[contains(@src, 'https://frontpagemeews.com/wp-content/uploads/2018/12/lazy-cat-cover-750x517.png')]")
         expect(page).to have_content("#{@shelter.name}: Pets")
         expect(page).to have_content("Opus")
