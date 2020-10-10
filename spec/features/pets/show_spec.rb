@@ -16,9 +16,9 @@ describe "As a visitor" do
 
       expect(page).to have_content("#{pet_1.image}")
       expect(page).to have_content("#{pet_1.name}")
+      expect(page).to have_content("#{pet_1.description}")
       expect(page).to have_content("#{pet_1.age}")
       expect(page).to have_content("#{pet_1.sex}")
-      expect(page).to have_content("#{pet_1.status}")
       expect(page).to have_content("Adoptable")
     end
   end
