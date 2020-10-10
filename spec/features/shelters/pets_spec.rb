@@ -22,10 +22,9 @@ describe "As a visitor" do
           })
 
 
-        pet_1 = Pet.create!({
+        pet_1 = Pet.create({
           image: "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg",
           name: "Garfield",
-          description: "Fluffy guy waiting to cuddle you up!",
           age: 5,
           sex: "male",
           shelter_id: "#{shelter_1.id}"
@@ -34,7 +33,6 @@ describe "As a visitor" do
         pet_2 = Pet.create({
           image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
           name: "Guiness",
-          description: "Floppy-eared scruffle excited to play ball!",
           age: 3,
           sex: "male",
           shelter_id: "#{shelter_2.id}"
@@ -46,7 +44,6 @@ describe "As a visitor" do
       expect(page).to have_content("#{shelter_1.name}: Pets")
       expect(page).to have_xpath("//img[contains(@src, '#{pet_1.image}')]")
       expect(page).to have_content("#{pet_1.name}")
-      expect(page).to have_content("#{pet_1.description}")
       expect(page).to have_content(pet_1.age)
       expect(page).to have_content("#{pet_1.sex}")
 
