@@ -39,12 +39,12 @@ describe "As a visitor" do
         expect(find_field('pet[description]').value).to eq("Beautiful golden bird, ready to party!")
         expect(find_field('pet[age]').value).to eq("7")
         expect(find_field('pet[sex]').value).to eq("Female")
-        expect(page).to have_button("Submit")
+        expect(page).to have_button("submit")
 
         fill_in "pet[name]", with: "Polly"
         expect(find_field('pet[name]').value).to eq("Polly")
 
-        click_button("Submit")
+        click_button("submit")
         expect(current_path).to eq("/pets/#{@pet.id}")
     end
   end
