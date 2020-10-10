@@ -7,17 +7,19 @@ describe "As a visitor" do
       pet_1 = Pet.create({
         image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
         name: "Guiness",
+        description: "Floppy-eared dude ready to play ball!",
         age: 3,
         sex: "male",
         })
 
       visit "/pets/#{pet_1.id}"
 
-      expect(page).to have_content("#{pet_1.name}")
       expect(page).to have_content("#{pet_1.image}")
+      expect(page).to have_content("#{pet_1.name}")
       expect(page).to have_content("#{pet_1.age}")
       expect(page).to have_content("#{pet_1.sex}")
       expect(page).to have_content("#{pet_1.status}")
+      expect(page).to have_content("Adoptable")
     end
   end
 end
