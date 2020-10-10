@@ -27,20 +27,26 @@ describe "As a visitor" do
       click_link "Update Pet"
       expect(current_path).to eq("/pets/#{@pet.id}/edit")
     end
+
+    it "To edit the pet's data including image, name, description, age, sex.  When
+        I click the button to submit, data is updated" do
+
+        visit "/pets/#{@pet.id}/edit"
+
+        expect(page).to have_content("Edit Pet:")
+        expect(find_field('pet[image]').value).to eq("https://media.angieslist.com/s3fs-public/styles/widescreen_large/public/parakeet.jpeg?itok=2pMpm55J")
+        expect(find_field('pet[name]').value).to eq("Perry")
+        expect(find_field('pet[description]').value).to eq("Beautiful golden bird, ready to party!")
+        expect(find_field('pet[age]').value).to eq(7)
+        expect(find_field('pet[sex]').value).to eq("Female")
+        expect(page).to have_button("Submit")
+
+        fill_in "pet[name]", with: "Polly"
+        expect(find_field('pet[name]').value).to eq("Polly")
+
+        click_button("Submit")
+        expect(current_path).to eq("/pets/#{@pet.id}")
+    end
+
   end
 end
-
-# As a visitor
-# When I visit a Pet Show page
-# Then I see a link to update that Pet "Update Pet"
-# When I click the link
-# I am taken to '/pets/:id/edit' where I see a form to edit the pet's data including:
-# - image
-# - name
-# - description
-# - approximate age
-# - sex
-# When I click the button to submit the form "Update Pet"
-# Then a `PATCH` request is sent to '/pets/:id',
-# the pet's data is updated,
-# and I am redirected to the Pet Show page where I see the Pet's updated information
