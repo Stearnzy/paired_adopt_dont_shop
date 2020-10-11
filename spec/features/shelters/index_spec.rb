@@ -50,5 +50,16 @@ describe "As a visitor" do
       find(:xpath, "(//a[text()='Delete'])[2]").click
       expect(page).to_not have_content("#{@shelter_2.name}")
     end
+
+    it "When I click on the name a shelter anywhere on the site
+      Then that link takes me to that Shelter's show page" do
+      visit "/shelters"
+
+      expect(page).to have_link("#{@shelter_1.name}")
+      expect(page).to have_link("#{@shelter_2.name}")
+      click_link("#{@shelter_1.name}")
+      expect(current_path).to eq("/shelters/#{@shelter_1.id}")
+    end
+
   end
 end

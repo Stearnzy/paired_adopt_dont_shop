@@ -72,5 +72,14 @@ describe "As a visitor" do
       expect(page).to_not have_content("#{@pet_3}.age")
       expect(page).to_not have_content("#{@pet_3}.sex")
     end
+
+    it "When I click on the name a shelter anywhere on the site
+      Then that link takes me to that Shelter's show page" do
+      visit "/pets"
+
+      expect(page).to have_link("#{@shelter.name}")
+      click_link("#{@shelter.name}")
+      expect(current_path).to eq("/shelters/#{@shelter.id}")
+    end
   end
 end
