@@ -17,7 +17,6 @@ describe "As a visitor" do
           name, address, city, state, and zip" do
       visit "/shelters/#{@shelter.id}"
 
-      expect(page).to have_link("Shelter Index")
       expect(page).to have_content("#{@shelter.name}")
       expect(page).to have_content("#{@shelter.address}")
       expect(page).to have_content("#{@shelter.city}")
@@ -41,6 +40,13 @@ describe "As a visitor" do
       expect(page).to have_link("See Pets")
       click_link("See Pets")
       expect(current_path).to eq("/shelters/#{@shelter.id}/pets")
+    end
+
+    it "To see links to pets index and shelter index" do
+      visit "/shelters/#{@shelter.id}"
+
+      expect(page).to have_link("To Pets Index")
+      expect(page).to have_link("To Shelters Index")
     end
   end
 end
