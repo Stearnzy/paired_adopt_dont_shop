@@ -5,7 +5,8 @@
   <h3><%= pet.name %></h3>
   <a href="/pets/<%= pet.id %>/edit">Edit Pet Info</a><br>
   <p>Age: <%= pet.age %></p>
-  <p>Sex: <%= pet.sex %></p><br>
+  <p>Sex: <%= pet.sex %></p>
+  <a href="/pets/<%= pet.id %>" data-method="DELETE">Delete Pet</a><br><br>
 <% end %>
 
 <%= link_to "Create Pet", "/shelters/#{@shelter.id}/pets/new" %>
