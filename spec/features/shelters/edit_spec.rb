@@ -28,6 +28,12 @@ describe "As a user" do
 
     click_button('submit')
     expect(current_path).to eq("/shelters/#{shelter.id}")
+
+    expect(page).to have_content("#{shelter.name}")
+    expect(page).to have_content("#{shelter.address}")
+    expect(page).to have_content("Denver")
+    expect(page).to have_content("#{shelter.state}")
+    expect(page).to have_content("#{shelter.zip}")
     end
   end
 end
