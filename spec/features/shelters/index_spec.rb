@@ -20,7 +20,6 @@ describe "As a visitor" do
     end
 
     it "then I see the name of each shelter in the system" do
-
       visit '/shelters'
 
       expect(page).to have_content("Our Family of Shelters")
@@ -35,7 +34,11 @@ describe "As a visitor" do
     end
 
     it "Next to every shelter I see a link to edit that shelter's info" do
-      visit '/'
+      visit '/shelters'
+
+      expect(page).to have_link("Edit Shelter", count: 2)
+      find(:xpath, "(//a[text()='Edit Shelter'])[2]").click
+      expect(current_path).to eq("/shelters/#{@shelter_2.id}/edit")
     end
   end
 end
