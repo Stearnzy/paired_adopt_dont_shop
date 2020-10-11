@@ -3,8 +3,9 @@
 <% @pets.each do |pet| %>
   <img src="<%= pet.image %>" alt="<%= pet.name %>">
   <h3><%= pet.name %></h3>
+  <a href="/pets/<%= pet.id %>/edit">Edit Pet Info</a><br>
   <p>Age: <%= pet.age %></p>
-  <p>Sex: <%= pet.sex %></p>
+  <p>Sex: <%= pet.sex %></p><br>
 <% end %>
 
 <%= link_to "Create Pet", "/shelters/#{@shelter.id}/pets/new" %>
