@@ -52,5 +52,18 @@ describe "As a visitor" do
       find(:xpath, "(//a[text()='Edit Pet Info'])[2]").click
       expect(current_path).to eq("/pets/#{@pet_2.id}/edit")
     end
+
+    it "Next to every pet, I see a link to delete that pet. Clicking it takes
+        me to the pets index page where I no longer see that pet" do
+      visit "/shelters/#{@shelter_1.id}/pets"
+
+      expect(page).to have_link("Delete Pet", count: 2)
+      find(:xpath, "(//a[text()='Delete Pet'])[2]").click
+      expect(page).to_not have_content("#{@pet_2}.image")
+      expect(page).to_not have_content("#{@pet_2}.name")
+      expect(page).to_not have_content("#{@pet_2}.age")
+      expect(page).to_not have_content("#{@pet_2}.sex")
+    end
+
   end
 end
