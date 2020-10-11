@@ -47,7 +47,6 @@ describe "As a visitor" do
         click_button("submit")
         expect(current_path).to eq("/pets/#{@pet.id}")
         expect(page).to have_xpath("//img[contains(@src, '#{@pet.image}')]")
-
         expect(page).to have_content("Polly")
         expect(page).to have_content("#{@pet.description}")
         expect(page).to have_content("#{@pet.age}")
