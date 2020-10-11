@@ -16,7 +16,7 @@ describe "As a user" do
     click_link "Update Shelter"
     expect(current_path).to eq("/shelters/#{shelter.id}/edit")
 
-    expect(page).to have_content("Edit shelter:")
+    expect(page).to have_content("Edit Shelter:")
     expect(find_field('shelter[name]').value).to eq("Crazy Cat Lady's")
     expect(find_field('shelter[address]').value).to eq("123 Litterbox Way")
     expect(find_field('shelter[city]').value).to eq("Littleton")
@@ -28,6 +28,12 @@ describe "As a user" do
 
     click_button('submit')
     expect(current_path).to eq("/shelters/#{shelter.id}")
+
+    expect(page).to have_content("#{shelter.name}")
+    expect(page).to have_content("#{shelter.address}")
+    expect(page).to have_content("Denver")
+    expect(page).to have_content("#{shelter.state}")
+    expect(page).to have_content("#{shelter.zip}")
     end
   end
 end

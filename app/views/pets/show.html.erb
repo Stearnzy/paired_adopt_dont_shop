@@ -1,0 +1,12 @@
+<img src=<%= @pet.image %> alt="<% @pet.name %>">
+
+<h2><%= @pet.name %></h2>
+<h4>Adoptable </h4>
+<p>Age: <%= @pet.age %></p>
+<p>Sex: <%= @pet.sex %></p>
+<hr>
+<p><%= @pet.description %></p>
+
+<a href="/pets/<%= @pet.id %>/edit">Update Pet</a><br>
+
+<a href="/pets/<%= @pet.id %>" data-method="DELETE">Delete Pet</a>
