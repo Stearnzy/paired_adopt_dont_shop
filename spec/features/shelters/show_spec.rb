@@ -16,7 +16,7 @@ describe "As a visitor" do
     it "I see the shelter with that id including the shelter's
           name, address, city, state, and zip" do
       visit "/shelters/#{@shelter.id}"
-      
+
       expect(page).to have_link("Shelter Index")
       expect(page).to have_content("#{@shelter.name}")
       expect(page).to have_content("#{@shelter.address}")
