@@ -1,7 +1,7 @@
 <h1>Furry Friends Needing a Home</h1>
 
 <% @pets.each do |pet| %>
-  <h3><%= pet.name %></h3>
+  <h2><a href="/pets/<%= pet.id %>"><%= pet.name %></a></h2>
   <img src="<%= pet.image %>" alt="<% pet.name %>">
   <p>Age: <%= pet.age %><br>
     Sex: <%= pet.sex %><br>
