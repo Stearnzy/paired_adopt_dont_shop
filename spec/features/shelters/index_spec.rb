@@ -33,12 +33,22 @@ describe "As a visitor" do
       expect(page).to have_link("New Shelter")
     end
 
-    it "Next to every shelter I see a link to edit that shelter's info" do
+    it "Next to every shelter I see a link to edit that shelter's info.  When I
+        click the link I should be taken to that shelter's edit page" do
       visit '/shelters'
 
       expect(page).to have_link("Edit Shelter", count: 2)
       find(:xpath, "(//a[text()='Edit Shelter'])[2]").click
       expect(current_path).to eq("/shelters/#{@shelter_2.id}/edit")
+    end
+
+    it "Next to every shelter I see a link to delete that shelter.  When I click
+        the link, I am returned to the Shelter Index Page" do
+      visit '/shelters'
+
+      expect(page).to have_link("Delete", count: 2)
+      find(:xpath, "(//a[text()='Delete'])[2]").click
+      expect(page).to_not have_content("#{@shelter_2.name}")
     end
   end
 end
