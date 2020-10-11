@@ -7,5 +7,6 @@
     Sex: <%= pet.sex %><br>
     Current shelter: <%= pet.shelter.name %>
   </p>
-  <a href="/pets/<%= pet.id %>/edit">Edit Pet Info</a><br><br>
+  <a href="/pets/<%= pet.id %>/edit">Edit Pet Info</a><br>
+  <a href="/pets/<%= pet.id %>" data-method="DELETE">Delete Pet</a><br><br>
 <% end %>
