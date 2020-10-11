@@ -12,7 +12,7 @@
   <%= radio_button_tag(:sex, "Male") %>
   <%= label_tag(:sex_male, "Male") %><br>
   <%= radio_button_tag(:sex, "Female") %>
-  <%= label_tag(:sex_female, "Female") %>
+  <%= label_tag(:sex_female, "Female") %><br>
   <%= hidden_field :shelter_id, value: @shelter.id %>
   <%= submit_tag "Create Pet" %>
 <% end %>
