@@ -7,5 +7,6 @@
   <input type="text" name="pet[description]" value="<%= @pet.description %>"/><br/>
   <input type="text" name="pet[age]" value="<%= @pet.age %>"/><br/>
   <input type="text" name="pet[sex]" value="<%= @pet.sex %>"/><br/>
-  <input type="submit" id="Submit" />
+  <input type="hidden" name="pet[shelter_id]" value="<% @pet.shelter_id %>"/><br>
+  <input type="submit" id="submit" />
 </form>
