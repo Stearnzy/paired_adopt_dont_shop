@@ -82,5 +82,12 @@ describe "As a visitor" do
       click_link("#{@pet_1.name}")
       expect(current_path).to eq("/pets/#{@pet_1.id}")
     end
+
+    it "To see links to pets index and shelter index" do
+      visit "/shelters/#{@shelter_1.id}/pets"
+
+      expect(page).to have_link("To Pets Index")
+      expect(page).to have_link("To Shelters Index")
+    end
   end
 end
