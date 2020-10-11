@@ -19,6 +19,15 @@ describe "As a visitor" do
         sex: "Male",
         shelter_id: "#{@shelter_1.id}"
         })
+
+      @pet_2 = Pet.create({
+        image: "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+        name: "Toby",
+        description: "Skittish, yet fun.",
+        age: 2,
+        sex: "Male",
+        shelter_id: "#{@shelter_1.id}"
+        })
     end
 
     it "then I see each Pet that can be adopted from that shelter with that shelter_id
@@ -33,6 +42,15 @@ describe "As a visitor" do
       expect(page).to have_content("#{@pet_1.sex}")
 
       expect(page).to have_link("Create Pet")
+    end
+
+    it "Next to every pet I see a link to edit that pet's info.  When I click
+        the link I should be taken to that pets edit page" do
+      visit "/shelters/#{@shelter_1.id}/pets"
+
+      expect(page).to have_link("Edit Pet Info", count: 2)
+      find(:xpath, "(//a[text()='Edit Pet Info'])[2]").click
+      expect(current_path).to eq("/pets/#{@pet_2.id}/edit")
     end
   end
 end
