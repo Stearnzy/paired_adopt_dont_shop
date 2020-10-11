@@ -22,8 +22,9 @@ describe "As a visitor" do
     end
 
     it "When I click the link I am taken to '/pets/:id/edit' where I see a form" do
-
       visit "/pets/#{@pet.id}"
+
+      expect(page).to have_link("Update Pet")
       click_link "Update Pet"
       expect(current_path).to eq("/pets/#{@pet.id}/edit")
     end
@@ -52,8 +53,13 @@ describe "As a visitor" do
         expect(page).to have_content("#{@pet.age}")
         expect(page).to have_content("#{@pet.sex}")
         expect(page).to have_content("Adoptable")
+    end
 
-        expect(page).to have_link("Update Pet")
+    it "To see links to pets index and shelter index" do
+      visit "/pets/#{@pet.id}/edit"
+
+      expect(page).to have_link("To Pets Index")
+      expect(page).to have_link("To Shelters Index")
     end
   end
 end
