@@ -37,8 +37,8 @@ describe "As a visitor" do
     it "I see a link to take me to that shelter's pets page" do
       visit "/shelters/#{@shelter.id}"
 
-      expect(page).to have_link("See Pets")
-      click_link("See Pets")
+      expect(page).to have_link("See Our Pets")
+      click_link("See Our Pets")
       expect(current_path).to eq("/shelters/#{@shelter.id}/pets")
     end
 
