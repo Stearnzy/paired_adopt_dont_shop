@@ -1,4 +1,4 @@
-<h1><%= @shelter.name %>: Pets</h1>
+<h1><a href="/shelters/<%= @shelter.id %>"><%= @shelter.name %></a>: Pets</h1>
 
 <% @pets.each do |pet| %>
   <img src="<%= pet.image %>" alt="<%= pet.name %>">
