@@ -34,5 +34,13 @@ describe "As a visitor" do
       visit "/shelters/#{@shelter.id}"
       expect(page).to have_button("Delete")
     end
+
+    it "I see a link to take me to that shelter's pets page" do
+      visit "/shelters/#{@shelter.id}"
+
+      expect(page).to have_link("See Pets")
+      click_link("See Pets")
+      expect(current_path).to eq("/shelters/#{@shelter.id}/pets")
+    end
   end
 end
