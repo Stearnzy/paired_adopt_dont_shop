@@ -78,7 +78,7 @@ describe "As a visitor" do
       visit "/pets"
 
       expect(page).to have_link("#{@shelter.name}")
-      click_link("#{@shelter.name}")
+      click_link("#{@shelter.name}", match: :first)
       expect(current_path).to eq("/shelters/#{@shelter.id}")
     end
   end
