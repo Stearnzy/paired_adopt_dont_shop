@@ -1,18 +1,20 @@
+<pre><a href="/pets">To Pets Index</a>  <a href="/shelters">To Shelters Index</a></pre>
+
 <h4>Create New Pet:</h4>
 
 <%= form_tag "/shelters/#{@shelter.id}/pets" do %>
-  <%= label_tag :upload_photo %>
-  <%= text_field_tag :image %><br>
-  <%= label_tag :name %>
-  <%= text_field_tag :name %><br>
-  <%= label_tag :description %>
-  <%= text_field_tag :description %><br>
-  <%= label_tag :age %>
-  <%= text_field_tag :age %><br>
+  <%= label_tag :photo_url %><br>
+  <%= text_field_tag :image %><br><br>
+  <%= label_tag :name %><br>
+  <%= text_field_tag :name %><br><br>
+  <%= label_tag :description %><br>
+  <%= text_field_tag :description %><br><br>
+  <%= label_tag :age %><br>
+  <%= text_field_tag :age %><br><br>
   <%= radio_button_tag(:sex, "Male") %>
   <%= label_tag(:sex_male, "Male") %><br>
   <%= radio_button_tag(:sex, "Female") %>
-  <%= label_tag(:sex_female, "Female") %><br>
-  <%= hidden_field :shelter_id, value: @shelter.id %>
+  <%= label_tag(:sex_female, "Female") %><br><br>
+  <%= hidden_field :shelter_id, value: @shelter.id %><br>
   <%= submit_tag "Create Pet" %>
 <% end %>

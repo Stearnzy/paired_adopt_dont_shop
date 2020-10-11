@@ -16,8 +16,7 @@ describe "As a visitor" do
     it "I see the shelter with that id including the shelter's
           name, address, city, state, and zip" do
       visit "/shelters/#{@shelter.id}"
-      
-      expect(page).to have_link("Shelter Index")
+
       expect(page).to have_content("#{@shelter.name}")
       expect(page).to have_content("#{@shelter.address}")
       expect(page).to have_content("#{@shelter.city}")
@@ -33,6 +32,21 @@ describe "As a visitor" do
     it "I see a link to delete the shelter" do
       visit "/shelters/#{@shelter.id}"
       expect(page).to have_button("Delete")
+    end
+
+    it "I see a link to take me to that shelter's pets page" do
+      visit "/shelters/#{@shelter.id}"
+
+      expect(page).to have_link("See Our Pets")
+      click_link("See Our Pets")
+      expect(current_path).to eq("/shelters/#{@shelter.id}/pets")
+    end
+
+    it "To see links to pets index and shelter index" do
+      visit "/shelters/#{@shelter.id}"
+
+      expect(page).to have_link("To Pets Index")
+      expect(page).to have_link("To Shelters Index")
     end
   end
 end

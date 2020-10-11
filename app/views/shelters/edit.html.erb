@@ -1,11 +1,18 @@
+<pre><a href="/pets">To Pets Index</a>  <a href="/shelters">To Shelters Index</a></pre>
+
 <form action="/shelters/<%= @shelter.id %>" method="post" class="edit_form">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="PATCH" />
-  <p>Edit Shelter:</p>
-  <input type="text" name="shelter[name]" value="<%= @shelter.name %>"/><br/>
-  <input type="text" name="shelter[address]" value="<%= @shelter.address %>"/><br/>
-  <input type="text" name="shelter[city]" value="<%= @shelter.city %>"/><br/>
-  <input type="text" name="shelter[state]" value="<%= @shelter.state %>"/><br/>
-  <input type="text" name="shelter[zip]" value="<%= @shelter.zip %>"/><br/>
+  <h4>Edit Shelter:</h4>
+  <label for="shelter[name]">Name:</label><br>
+  <input type="text" name="shelter[name]" value="<%= @shelter.name %>"/><br/><br>
+  <label for="shelter[address]">Address:</label><br>
+  <input type="text" name="shelter[address]" value="<%= @shelter.address %>"/><br/><br>
+  <label for="shelter[city]">City:</label><br>
+  <input type="text" name="shelter[city]" value="<%= @shelter.city %>"/><br/><br>
+  <label for="shelter[state]">State:</label><br>
+  <input type="text" name="shelter[state]" value="<%= @shelter.state %>"/><br/><br>
+  <label for="shelter[zip]">Zip:</label><br>
+  <input type="text" name="shelter[zip]" value="<%= @shelter.zip %>"/><br/><br>
   <input type="submit" id="submit" />
 </form>

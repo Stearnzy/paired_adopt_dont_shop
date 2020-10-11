@@ -12,5 +12,12 @@ describe "When I am taken to '/shelters/new'" do
 
     click_button("Create Shelter")
   end
+
+  it "To see links to pets index and shelter index" do
+    visit "/shelters/new"
+
+    expect(page).to have_link("To Pets Index")
+    expect(page).to have_link("To Shelters Index")
+  end
 end
 

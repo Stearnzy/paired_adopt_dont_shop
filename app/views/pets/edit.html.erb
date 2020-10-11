@@ -1,12 +1,19 @@
+<pre><a href="/pets">To Pets Index</a>  <a href="/shelters">To Shelters Index</a></pre>
 <form action="/pets/<%= @pet.id %>" method="post" class="edit_form">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="PATCH" />
   <h4>Edit Pet:</h4>
-  <input type="text" name="pet[image]" value="<%= @pet.image %>"/><br/>
-  <input type="text" name="pet[name]" value="<%= @pet.name %>"/><br/>
-  <input type="text" name="pet[description]" value="<%= @pet.description %>"/><br/>
-  <input type="text" name="pet[age]" value="<%= @pet.age %>"/><br/>
-  <input type="text" name="pet[sex]" value="<%= @pet.sex %>"/><br/>
-  <input type="hidden" name="pet[shelter_id]" value="<%= @pet.shelter_id %>"/><br>
+  <label for="pet[image]">Pet Image URL:</label><br>
+  <input type="text" name="pet[image]" size="38" value="<%= @pet.image %>"/><br><br>
+  <label for="pet[name]">Name:</label><br>
+  <input type="text" name="pet[name]" value="<%= @pet.name %>"/><br><br>
+  <label for="pet[description]">Description:</label><br>
+  <textarea name="pet[description]" rows="4" cols="30"><%= @pet.description %></textarea><br><br>
+  <label for="pet[age]">Age:</label><br>
+  <input type="text" name="pet[age]" value="<%= @pet.age %>"/><br><br>
+  <label for="male">Sex:</label><br>
+  <input type="text" name="pet[sex]" value="<%= @pet.sex %>">
+  <input type="hidden" name="pet[shelter_id]" value="<%= @pet.shelter_id %>"/><br><br>
   <input type="submit" id="submit" />
-</form>
+</form><br>
+

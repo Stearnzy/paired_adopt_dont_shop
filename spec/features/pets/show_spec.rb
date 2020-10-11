@@ -53,5 +53,12 @@ describe "As a visitor" do
       expect(current_path).to eq("/pets")
       expect(page).to_not have_content("#{@pet_1.name}")
     end
+
+    it "To see links to pets index and shelter index" do
+      visit "/pets/#{@pet_1.id}"
+
+      expect(page).to have_link("To Pets Index")
+      expect(page).to have_link("To Shelters Index")
+    end
   end
 end

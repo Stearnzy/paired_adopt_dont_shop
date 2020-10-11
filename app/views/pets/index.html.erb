@@ -1,10 +1,14 @@
+<pre><a href="/shelters">To Shelters Index</a></pre>
+
 <h1>Furry Friends Needing a Home</h1>
 
 <% @pets.each do |pet| %>
-  <h3><%= pet.name %></h3>
-  <img src="<%= pet.image %>" alt="<% pet.name %>">
+  <h2><a href="/pets/<%= pet.id %>"><%= pet.name %></a></h2>
+  <img src="<%= pet.image %>" alt="<% pet.name %>" width="30%">
   <p>Age: <%= pet.age %><br>
     Sex: <%= pet.sex %><br>
-    Current shelter: <%= pet.shelter.name %>
+    Current shelter: <a href="/shelters/<%= pet.shelter.id %>"><%= pet.shelter.name %></a>
   </p>
+  <a href="/pets/<%= pet.id %>/edit">Edit Pet Info</a><br>
+  <a href="/pets/<%= pet.id %>" data-method="DELETE">Delete Pet</a><br><br>
 <% end %>
