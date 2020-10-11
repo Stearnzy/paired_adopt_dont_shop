@@ -41,8 +41,6 @@ class PetsController < ApplicationController
       shelter_id: params[:pet][:shelter_id]
       })
 
-    pet.save
-
     redirect_to "/pets/#{pet.id}"
   end
 end
