@@ -95,7 +95,6 @@ describe "As a visitor" do
     it "To see links to pets index and shelter index" do
       visit "/pets"
 
-      expect(page).to have_link("To Pets Index")
       expect(page).to have_link("To Shelters Index")
     end
   end
