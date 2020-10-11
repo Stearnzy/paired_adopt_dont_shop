@@ -4,7 +4,7 @@
 
 <% @pets.each do |pet| %>
   <h2><a href="/pets/<%= pet.id %>"><%= pet.name %></a></h2>
-  <img src="<%= pet.image %>" alt="<% pet.name %>">
+  <img src="<%= pet.image %>" alt="<% pet.name %>" width="30%">
   <p>Age: <%= pet.age %><br>
     Sex: <%= pet.sex %><br>
     Current shelter: <a href="/shelters/<%= pet.shelter.id %>"><%= pet.shelter.name %></a>
