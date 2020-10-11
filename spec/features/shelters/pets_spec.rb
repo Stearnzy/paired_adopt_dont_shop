@@ -75,7 +75,7 @@ describe "As a visitor" do
     end
 
     it "When I click on the name of a pet, that link takes me to pet show page" do
-      visit "/shelters/#{shelter_1.id}/pets"
+      visit "/shelters/#{@shelter_1.id}/pets"
 
       expect(page).to have_link("#{@pet_1.name}")
       expect(page).to have_link("#{@pet_2.name}")
