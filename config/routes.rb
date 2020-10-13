@@ -21,5 +21,8 @@ Rails.application.routes.draw do
   delete '/pets/:id', to: 'pets#destroy'
 
   # Shelter Pets Controller path
-    get '/shelters/:id/pets', to: 'shelter_pets#index'
+  get '/shelters/:id/pets', to: 'shelter_pets#index'
+
+  # Users Controller path 
+  get '/users/:id', to: 'users#show'
 end
