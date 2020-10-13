@@ -11,7 +11,14 @@ describe "As a visitor" do
         zip: "80110"
         })
 
-      end
+      @user = User.create({
+        name: 'Bobby',
+        street_address: '123 fake st.',
+        city: 'Fakertown',
+        state: 'CO',
+        zip: '80205'
+      })
+    end
 
     it "I see the shelter with that id including the shelter's
           name, address, city, state, and zip" do
@@ -51,33 +58,47 @@ describe "As a visitor" do
 
     it "I see a list of reviews for that shelter including
      title, rating, content, user name, and optional picture." do
-     visit "shelters/#{@shelter.id}"
+     # With photo
 
-    user = User.create({
-      name: 'Bobby',
-      street_address: '123 fake st.',
-      city: 'Fakertown',
-      state: 'CO',
-      zip: '80205'
-    })
+      visit "shelters/#{@shelter.id}"
 
-    review = Review.create!({
-      title: "Great Place!",
-      rating: 4,
-      content: "Friendly staff, clean establishment",
-      user_name: "Cat Lady",
-      picture: "https://unsplash.com/photos/ethVHUKAaEI",
-      shelter_id: "#{@shelter.id}",
-      user_id: "#{user.id}"
-    })
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Cat Lady",
+        picture: "https://unsplash.com/photos/ethVHUKAaEI",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+      })
 
       expect(page).to have_content("#{review.title}")
       expect(page).to have_content("#{review.rating}")
       expect(page).to have_content("#{review.content}")
       expect(page).to have_content("#{review.user_name}")
       expect(page).to have_content("#{review.picture}")
+    end
 
-     end
+    it "I see a list of reviews for that shelter including
+      title, rating, content, user name, and optional picture." do
+      # Without photo
 
+      visit "shelters/#{@shelter.id}"
+
+      review = Review.create!({
+       title: "Great Place!",
+       rating: 4,
+       content: "Friendly staff, clean establishment",
+       user_name: "Cat Lady",
+       shelter_id: "#{@shelter.id}",
+       user_id: "#{@user.id}"
+       })
+
+       expect(page).to have_content("#{review.title}")
+       expect(page).to have_content("#{review.rating}")
+       expect(page).to have_content("#{review.content}")
+       expect(page).to have_content("#{review.user_name}")
+       expect(page).to_not have_content("#{review.picture}")
+    end
   end
 end
