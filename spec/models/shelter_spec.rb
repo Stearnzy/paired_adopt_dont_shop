@@ -11,6 +11,6 @@ describe Shelter, type: :model do
 
   describe "relationships" do
     it { should have_many(:pets).dependent(:destroy) }
-    it { should have_many(:reviews).dependant(:destroy) }
+    it { should have_many(:reviews).dependent(:destroy) }
   end
 end
