@@ -50,7 +50,7 @@ describe "As a visitor" do
     end
 
     it "I see a list of reviews for that shelter including
-     title, rating, content, user name, and optional picture." do 
+     title, rating, content, user name, and optional picture." do
      visit "shelters/#{@shelter.id}"
 
     user = User.create({
