@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   # Users Controller path 
   get '/users/:id', to: 'users#show'
+  get '/users/new', to: 'users#new'
+  post '/users/:id', to: 'users#create'
 end
