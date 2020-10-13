@@ -53,19 +53,30 @@ describe "As a visitor" do
      title, rating, content, user name, and optional picture." do 
      visit "shelters/#{@shelter.id}"
 
+    user = User.create({
+      name: 'Bobby',
+      street_address: '123 fake st.',
+      city: 'Fakertown',
+      state: 'CO',
+      zip: '80205'
+    })
+
     review = Review.create!({
       title: "Great Place!",
       rating: 4,
       content: "Friendly staff, clean establishment",
       user_name: "Cat Lady",
-      picture: "https://unsplash.com/photos/ethVHUKAaEI"
+      picture: "https://unsplash.com/photos/ethVHUKAaEI",
+      shelter_id: "#{@shelter.id}",
+      user_id: "#{user.id}"
     })
 
-    expect(page).to have_content("#{review.title}")
-    expect(page).to have_content("#{review.rating}")
-    expect(page).to have_content("#{review.content}")
-    expect(page).to have_content("#{review.user_name}")
-    expect(page).to have_content("#{review.picture}")
+      expect(page).to have_content("#{review.title}")
+      expect(page).to have_content("#{review.rating}")
+      expect(page).to have_content("#{review.content}")
+      expect(page).to have_content("#{review.user_name}")
+      expect(page).to have_content("#{review.picture}")
+
      end
 
   end
