@@ -60,7 +60,7 @@ describe "As a visitor" do
      title, rating, content, user name, and optional picture." do
      # With photo
 
-      visit "shelters/#{@shelter.id}"
+      visit "/shelters/#{@shelter.id}"
 
       review = Review.create!({
         title: "Great Place!",
@@ -83,7 +83,7 @@ describe "As a visitor" do
       title, rating, content, user name, and optional picture." do
       # Without photo
 
-      visit "shelters/#{@shelter.id}"
+      visit "/shelters/#{@shelter.id}"
 
       review = Review.create!({
        title: "Great Place!",
@@ -100,5 +100,14 @@ describe "As a visitor" do
        expect(page).to have_content("#{review.user_name}")
        expect(page).to_not have_content("#{review.picture}")
     end
+
+    # it "I see a link to add a new reivew.  When I click this link
+    #   I am taken to a new review path" do
+    #   visit "/shelters/#{@shelter.id}"
+    #
+    #   expect(page).to have_link("Leave a Review")
+    #   click_link("Leave a Review")
+    #   expect(current_path).to eq("/shelters/#{@shelter.id}/new_review")
+    # end
   end
 end

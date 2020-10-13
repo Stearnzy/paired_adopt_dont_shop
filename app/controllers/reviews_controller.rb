@@ -1,5 +1,6 @@
 class ReviewController < ApplicationController
   def new
+    @shelter = Shelter.params([:shelter_id])
   end
 
   def create

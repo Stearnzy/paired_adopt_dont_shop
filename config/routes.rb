@@ -29,6 +29,6 @@ Rails.application.routes.draw do
   post '/users/:id', to: 'users#create'
 
   # Reviews Controller path
-  get '/shelters/:shelter_id/new_review', to: 'reviews#new'
+  get '/shelters/:shelter_id/review/new', to: 'reviews#new'
   post '/shelters/:shelter_id', to: 'reviews#create'
 end
