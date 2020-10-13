@@ -1,6 +1,6 @@
 <h1>Create User</h1>
 
-<%= form_tag "/users/#{@user.id}" do %>
+<%= form_tag "/users/:id" do %>
   <%= label_tag :name %><br>
   <%= text_field_tag :name %><br><br>
   <%= label_tag :street_address %><br>
