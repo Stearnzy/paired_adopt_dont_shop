@@ -9,11 +9,12 @@
 
 <a href="/shelters/<%= @shelter.id %>/review/new">Leave a Review</a><br>
 
+<h3>Reviews</h3>
 <% @reviews.each do |review| %>
   <h4><%= review.title %></h4>
   <h6><%= review.user_name %>: <%= review.rating %></h6>
   <p><%= review.content %></p>
-  <<img src="<%= review.picture %>" alt="User Photo">
+  <img src="<%= review.picture %>" onerror="this.onerror=null;this.src='http://example.com/existent-image.jpg';">
 <% end %>
 
 <a href="/shelters/<%= @shelter.id %>/edit">Update Shelter</a><br>
