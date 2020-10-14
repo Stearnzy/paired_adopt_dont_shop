@@ -11,24 +11,8 @@ describe "As a visitor" do
         zip: "80110"
         })
     end
-
-    # it "I see a link to add a new review that takes me to a new review path" do
-    #   visit "/shelters/#{@shelter.id}"
     #
-    #   expect(page).to have_link("Leave a Review")
-    #   click_link("Leave a Review")
-    #   expect(current_path).to eq("/shelters/#{@shelter.id}/review/new")
-    # end
-    #
-    # it "I see a form where I must enter title, rating, content, user name" do
-    #   user = User.create({
-    #     name: 'Bobby',
-    #     street_address: '123 fake st.',
-    #     city: 'Fakertown',
-    #     state: 'CO',
-    #     zip: '80205'
-    #   })
-    #
+    # it "I see a form where I must enter title, rating, content, user name" do    #
     #   visit "/shelters/#{@shelter.id}/review/new"
     #
     #   fill_in "title", with: "Great place!"

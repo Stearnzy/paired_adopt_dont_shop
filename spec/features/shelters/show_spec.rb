@@ -102,13 +102,13 @@ describe "As a visitor" do
        # expect(page).to_not have_content("#{review.picture}")
     end
 
-    # it "I see a link to add a new reivew.  When I click this link
-    #   I am taken to a new review path" do
-    #   visit "/shelters/#{@shelter.id}"
-    #
-    #   expect(page).to have_link("Leave a Review")
-    #   click_link("Leave a Review")
-    #   expect(current_path).to eq("/shelters/#{@shelter.id}/new_review")
-    # end
+    it "I see a link to add a new reivew.  When I click this link
+      I am taken to a new review path" do
+      visit "/shelters/#{@shelter.id}"
+
+      expect(page).to have_link("Leave a Review")
+      click_link("Leave a Review")
+      expect(current_path).to eq("/shelters/#{@shelter.id}/review/new")
+    end
   end
 end
