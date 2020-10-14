@@ -56,28 +56,28 @@ describe "As a visitor" do
       expect(page).to have_link("To Shelters Index")
     end
 
-    # it "I see a list of reviews for that shelter including
-    #  title, rating, content, user name, and optional picture." do
-    #  # With photo
-    #
-    #   visit "/shelters/#{@shelter.id}"
-    #
-    #   review = Review.create!({
-    #     title: "Great Place!",
-    #     rating: 4,
-    #     content: "Friendly staff, clean establishment",
-    #     user_name: "Cat Lady",
-    #     picture: "https://unsplash.com/photos/ethVHUKAaEI",
-    #     shelter_id: "#{@shelter.id}",
-    #     user_id: "#{@user.id}"
-    #   })
-    #
-    #   expect(page).to have_content("#{review.title}")
-    #   expect(page).to have_content("#{review.rating}")
-    #   expect(page).to have_content("#{review.content}")
-    #   expect(page).to have_content("#{review.user_name}")
-    #   expect(page).to have_content("#{review.picture}")
-    # end
+    it "I see a list of reviews for that shelter including
+     title, rating, content, user name, and optional picture." do
+     # With photo
+
+      visit "/shelters/#{@shelter.id}"
+
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Cat Lady",
+        picture: "https://unsplash.com/photos/ethVHUKAaEI",
+        shelter_id: "#{@shelter.id}"
+        # user_id: "#{@user.id}"
+      })
+
+      expect(page).to have_content("#{review.title}")
+      expect(page).to have_content("#{review.rating}")
+      expect(page).to have_content("#{review.content}")
+      expect(page).to have_content("#{review.user_name}")
+      expect(page).to have_content("#{review.picture}")
+    end
     #
     # it "I see a list of reviews for that shelter including
     #   title, rating, content, user name, and optional picture." do
