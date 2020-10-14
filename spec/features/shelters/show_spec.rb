@@ -60,8 +60,6 @@ describe "As a visitor" do
      title, rating, content, user name, and optional picture." do
      # With photo
 
-      visit "/shelters/#{@shelter.id}"
-
       review = Review.create!({
         title: "Great Place!",
         rating: 4,
@@ -72,27 +70,30 @@ describe "As a visitor" do
         # user_id: "#{@user.id}"
       })
 
+      visit "/shelters/#{@shelter.id}"
+
       expect(page).to have_content("#{review.title}")
       expect(page).to have_content("#{review.rating}")
       expect(page).to have_content("#{review.content}")
       expect(page).to have_content("#{review.user_name}")
-      expect(page).to have_content("#{review.picture}")
-    end
+      # expect(page).to have_content("#{review.picture}")
+      expect(page).to have_xpath("//img[contains(@src, '#{review.picture}')]")
+
+      end
     #
     # it "I see a list of reviews for that shelter including
     #   title, rating, content, user name, and optional picture." do
     #   # Without photo
+    #   review = Review.create!({
+    #     title: "Great Place!",
+    #     rating: 4,
+    #     content: "Friendly staff, clean establishment",
+    #     user_name: "Cat Lady",
+    #     shelter_id: "#{@shelter.id}",
+    #     user_id: "#{@user.id}"
+    #     })
     #
     #   visit "/shelters/#{@shelter.id}"
-    #
-    #   review = Review.create!({
-    #    title: "Great Place!",
-    #    rating: 4,
-    #    content: "Friendly staff, clean establishment",
-    #    user_name: "Cat Lady",
-    #    shelter_id: "#{@shelter.id}",
-    #    user_id: "#{@user.id}"
-    #    })
     #
     #    expect(page).to have_content("#{review.title}")
     #    expect(page).to have_content("#{review.rating}")
@@ -100,7 +101,7 @@ describe "As a visitor" do
     #    expect(page).to have_content("#{review.user_name}")
     #    expect(page).to_not have_content("#{review.picture}")
     # end
-    #
+
     # it "I see a link to add a new reivew.  When I click this link
     #   I am taken to a new review path" do
     #   visit "/shelters/#{@shelter.id}"

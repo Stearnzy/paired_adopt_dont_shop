@@ -12,6 +12,6 @@ describe Review, type: :model do
 
   describe "relationship" do
     it { should belong_to :shelter }
-    it { should belong_to :user }
+    # it { should belong_to :user }
   end
 end
