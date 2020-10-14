@@ -12,7 +12,10 @@ describe "As a visitor" do
       fill_in "Zip", with: "80563"
 
       click_button("Create User")
-      # expect(current_path).to  eq("/users/#{user.id}")
+
+      user = User.last
+      
+      expect(current_path).to  eq("/users/#{user.id}")
       expect(page).to have_content("Harry Potter")
       expect(page).to have_content("555 Fluffytail Lane")
       expect(page).to have_content("London")
