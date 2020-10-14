@@ -88,7 +88,6 @@ describe "As a visitor" do
         content: "Friendly staff, clean establishment",
         user_name: "Cat Lady",
         shelter_id: "#{@shelter.id}"
-        # user_id: "#{@user.id}"
         })
 
       visit "/shelters/#{@shelter.id}"
@@ -97,6 +96,9 @@ describe "As a visitor" do
        expect(page).to have_content("#{review.rating}")
        expect(page).to have_content("#{review.content}")
        expect(page).to have_content("#{review.user_name}")
+
+       # SHOULD HAVE TEST FOR IMAGE NOT EXISTING
+       # expect(page).to_not have_xpath("//img[contains(@src, '#{review.picture}')]")
        # expect(page).to_not have_content("#{review.picture}")
     end
 

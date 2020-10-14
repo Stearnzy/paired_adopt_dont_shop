@@ -14,7 +14,9 @@
   <h4><%= review.title %></h4>
   <h6><%= review.user_name %>: <%= review.rating %></h6>
   <p><%= review.content %></p>
-  <img src="<%= review.picture %>" onerror="this.onerror=null;this.src='http://example.com/existent-image.jpg';">
+  <% if review.picture != nil %>
+    <img src="<%= review.picture %>" alt="Photo" width="30%">
+  <% end %>
 <% end %>
 
 <a href="/shelters/<%= @shelter.id %>/edit">Update Shelter</a><br>
