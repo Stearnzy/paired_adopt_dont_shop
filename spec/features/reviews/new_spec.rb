@@ -12,7 +12,15 @@ describe "As a visitor" do
         })
     end
     #
-    # it "I see a form where I must enter title, rating, content, user name" do    #
+    # it "I see a form where I must enter title, rating, content, user name" do
+    #   user = User.create({
+    #     name: 'Bobby',
+    #     street_address: '123 fake st.',
+    #     city: 'Fakertown',
+    #     state: 'CO',
+    #     zip: '80205'
+    #   })
+    #
     #   visit "/shelters/#{@shelter.id}/review/new"
     #
     #   fill_in "title", with: "Great place!"
@@ -26,9 +34,7 @@ describe "As a visitor" do
     #   expect(page).to have_content("Great place!")
     #   expect(page).to have_content("4")
     #   expect(page).to have_content("Can't wait to come back! Louis was awesome!")
-    #   expect(page).to have_content("#{user.name}")
+    #   expect(page).to have_content("Bobby")
     # end
-    #
-
   end
 end
