@@ -6,7 +6,7 @@ describe Review, type: :model do
     it { should validate_presence_of :rating }
     it { should validate_presence_of :content }
     # I think this is correct?
-    it { should allow_value(nil).for(:picture) }
+    # it { should allow_value(nil).for(:picture) }
     # it { should validate_presence_of :picture }
   end
 
