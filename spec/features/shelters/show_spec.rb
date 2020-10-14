@@ -87,6 +87,7 @@ describe "As a visitor" do
         rating: 4,
         content: "Friendly staff, clean establishment",
         user_name: "Cat Lady",
+        picture: "",
         shelter_id: "#{@shelter.id}"
         })
 
@@ -96,10 +97,7 @@ describe "As a visitor" do
        expect(page).to have_content("#{review.rating}")
        expect(page).to have_content("#{review.content}")
        expect(page).to have_content("#{review.user_name}")
-
-       # SHOULD HAVE TEST FOR IMAGE NOT EXISTING
-       # expect(page).to_not have_xpath("//img[contains(@src, '#{review.picture}')]")
-       # expect(page).to_not have_content("#{review.picture}")
+       expect(page).to_not have_xpath("//img[contains(@src, '#{review.picture}')]")
     end
 
     it "I see a link to add a new reivew.  When I click this link
