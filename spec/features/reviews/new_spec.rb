@@ -2,8 +2,18 @@ require 'rails_helper'
 
 describe "As a visitor" do
   describe "When I visit a shelter's show page" do
+    before(:each) do
+      @shelter = Shelter.create({
+        name: "Crazy Cat Lady's",
+        address: "123 Litterbox Way",
+        city: "Littleton",
+        state: "CO",
+        zip: "80110"
+        })
+    end
+
     it "I see a link to add a new review that takes me to a new review path" do
-      visit "/shelters/#{shelter.id}"
+      visit "/shelters/#{@shelter.id}"
 
       expect(page).to have_link("Leave a Review")
       click_link("Leave a Review")
@@ -11,14 +21,6 @@ describe "As a visitor" do
     end
 
     it "I see a form where I must enter title, rating, content, user name" do
-      shelter = Shelter.create({
-        name: "Crazy Cat Lady's",
-        address: "123 Litterbox Way",
-        city: "Littleton",
-        state: "CO",
-        zip: "80110"
-        })
-
       user = User.create({
         name: 'Bobby',
         street_address: '123 fake st.',
@@ -27,7 +29,7 @@ describe "As a visitor" do
         zip: '80205'
       })
 
-      visit "/shelters/#{shelter.id}"
+      visit "/shelters/#{@shelter.id}/review/new"
 
       fill_in "title", with: "Great place!"
       fill_in "rating", with: 4
@@ -36,7 +38,7 @@ describe "As a visitor" do
 
       click_button "Submit"
 
-      expect(current_path).to eq("/shelters/#{shelter.id}")
+      expect(current_path).to eq("/shelters/#{@shelter.id}")
       expect(page).to have_content("Great place!")
       expect(page).to have_content("4")
       expect(page).to have_content("Can't wait to come back! Louis was awesome!")

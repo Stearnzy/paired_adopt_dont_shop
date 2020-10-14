@@ -1,4 +1,7 @@
 <%= form_tag("/shelters/#{@shelter.id}", method: :post) do %>
+  <%= label_tag "User name" %>
+  <%= text_field_tag :user_name %>
+
   <%= label_tag "Title" %>
   <%= text_field_tag :title %>
 
