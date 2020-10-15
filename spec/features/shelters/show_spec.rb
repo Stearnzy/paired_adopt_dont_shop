@@ -140,8 +140,8 @@ describe "As a visitor" do
         # user_id: "#{@user.id}"
         })
         visit "/shelters/#{@shelter.id}"
-        expect(page).to have_button("Delete Review")
-        click_button("Delete Review")
+        expect(page).to have_link("Delete Review")
+        click_link("Delete Review")
 
         expect(page).to_not have_content("#{review.title}")
         expect(page).to_not have_content("#{review.rating}")

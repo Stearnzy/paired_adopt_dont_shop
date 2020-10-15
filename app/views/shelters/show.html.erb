@@ -17,8 +17,8 @@
   <% if review.picture != "" %>
     <%= image_tag(review.picture, width:'30%') %>
   <% end %><br>
-  <%= link_to "Edit Review", "/shelters/#{@shelter.id}/review/#{review.id}/edit" %>
-  <%= button_to "Delete Review", "/shelters/#{@shelter.id}/review/#{review.id}", method: "delete" %>
+  <%= link_to "Edit Review", "/shelters/#{@shelter.id}/review/#{review.id}/edit" %><br>
+  <%= link_to "Delete Review", "/shelters/#{@shelter.id}/review/#{review.id}", method: "delete" %>
 <% end %><br><br>
 
 <a href="/shelters/<%= @shelter.id %>/edit">Update Shelter</a><br><br>
