@@ -1,18 +1,18 @@
 <%= form_tag("/shelters/#{@shelter.id}", method: :post) do %>
-  <%= label_tag "User name" %>
-  <%= text_field_tag :user_name %>
+  <%= label_tag "User name" %><br>
+  <%= text_field_tag :user_name %><br><br>
 
-  <%= label_tag "Title" %>
-  <%= text_field_tag :title %>
+  <%= label_tag "Title" %><br>
+  <%= text_field_tag :title %><br><br>
 
-  <%= label_tag "Rating" %>
-  <%= number_field_tag :rating %>
+  <%= label_tag "Rating" %><br>
+  <%= number_field_tag :rating %><br><br>
 
-  <%= label_tag "Content" %>
-  <%= text_field_tag :content %>
+  <%= label_tag "Content" %><br>
+  <%= text_field_tag :content %><br><br>
 
-  <%= label_tag "Picture" %>
-  <%= text_field_tag :picture %>
+  <%= label_tag "Picture" %><br>
+  <%= text_field_tag :picture %><br><br>
 
   <%= submit_tag "Submit"%>
 <% end %>
