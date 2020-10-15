@@ -128,5 +128,26 @@ describe "As a visitor" do
       click_on("Edit Review")
       expect(current_path).to eq("/shelters/#{@shelter.id}/review/#{review.id}/edit")
     end
+
+    it "I see a link next to each shelter review to delete the review." do
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Carole",
+        picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
+        shelter_id: "#{@shelter.id}"
+        # user_id: "#{@user.id}"
+        })
+        visit "/shelters/#{@shelter.id}"
+        expect(page).to have_button("Delete Review")
+        click_button("Delete Review")
+
+        expect(page).to_not have_content("#{review.title}")
+        expect(page).to_not have_content("#{review.rating}")
+        expect(page).to_not have_content("#{review.content}")
+        expect(page).to_not have_content("#{review.user_name}")
+        expect(page).to_not have_content("#{review.picture}")
+    end
   end
 end
