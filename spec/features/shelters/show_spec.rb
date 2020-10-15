@@ -57,6 +57,28 @@ describe "As a visitor" do
     end
 
     it "I see a list of reviews for that shelter including
+      title, rating, content, user name, and optional picture." do
+      # Without photo
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Cat Lady",
+        picture: "",
+        shelter_id: "#{@shelter.id}"
+        #user_id: "#@user.id"
+        })
+
+      visit "/shelters/#{@shelter.id}"
+
+       expect(page).to have_content("#{review.title}")
+       expect(page).to have_content("#{review.rating}")
+       expect(page).to have_content("#{review.content}")
+       expect(page).to have_content("#{review.user_name}")
+       expect(page).to_not have_xpath("//img[contains(@src, '#{review.picture}')]")
+    end
+
+    it "I see a list of reviews for that shelter including
      title, rating, content, user name, and optional picture." do
      # With photo
 
@@ -79,27 +101,6 @@ describe "As a visitor" do
       expect(page).to have_xpath("//img[contains(@src, '#{review.picture}')]")
       end
 
-    it "I see a list of reviews for that shelter including
-      title, rating, content, user name, and optional picture." do
-      # Without photo
-      review = Review.create!({
-        title: "Great Place!",
-        rating: 4,
-        content: "Friendly staff, clean establishment",
-        user_name: "Cat Lady",
-        picture: "",
-        shelter_id: "#{@shelter.id}"
-        })
-
-      visit "/shelters/#{@shelter.id}"
-
-       expect(page).to have_content("#{review.title}")
-       expect(page).to have_content("#{review.rating}")
-       expect(page).to have_content("#{review.content}")
-       expect(page).to have_content("#{review.user_name}")
-       expect(page).to_not have_xpath("//img[contains(@src, '#{review.picture}')]")
-    end
-
     it "I see a link to add a new reivew.  When I click this link
       I am taken to a new review path" do
       visit "/shelters/#{@shelter.id}"
@@ -107,6 +108,25 @@ describe "As a visitor" do
       expect(page).to have_link("Leave a Review")
       click_link("Leave a Review")
       expect(current_path).to eq("/shelters/#{@shelter.id}/review/new")
+    end
+
+    it "I see a link to edit the shelter review next to each review. When I click
+        this link, I am taken to an edit shelter review path" do
+
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Cat Lady",
+        picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
+        shelter_id: "#{@shelter.id}"
+        # user_id: "#{@user.id}"
+      })
+
+      visit "/shelters/#{@shelter.id}"
+      expect(page).to have_link("Edit Review")
+      click_on("Edit Review")
+      expect(current_path).to eq("/shelters/#{@shelter.id}/review/#{review.id}/edit")
     end
   end
 end
