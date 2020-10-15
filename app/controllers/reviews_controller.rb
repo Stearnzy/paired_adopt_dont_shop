@@ -33,8 +33,8 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    review = Review.find(params[:review_id])
-    review.update({
+    @review = Review.find(params[:review_id])
+    @review.update({
       title: params[:title],
       rating: params[:rating],
       content: params[:content],
@@ -43,7 +43,7 @@ class ReviewsController < ApplicationController
       user_id: params[:user_id]
       })
 
-    shelter_id = review.shelter_id
+    shelter_id = @review.shelter_id
 
     redirect_to "/shelters/#{shelter_id}"
   end

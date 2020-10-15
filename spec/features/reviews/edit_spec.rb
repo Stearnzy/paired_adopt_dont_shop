@@ -22,7 +22,7 @@ describe "As a user" do
       title: "Great Place!",
       rating: 4,
       content: "Friendly staff, clean establishment",
-      user_name: "Cat Lady",
+      user_name: "Bobby",
       picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
       shelter_id: "#{shelter.id}",
       user_id: "#{user.id}"
@@ -41,7 +41,11 @@ describe "As a user" do
     expect(find_field("rating").value).to eq("5")
 
     click_button('Submit')
-    expect(current_path).to eq("/shelters/#{shelter.id}")
+
+    within "#rev" do
+      expect(current_path).to eq("/shelters/#{shelter.id}")
+      expect(page).to have_content("5")
     end
+  end
   end
 end
