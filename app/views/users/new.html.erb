@@ -1,0 +1,15 @@
+<h1>Create User</h1>
+
+<%= form_tag "/users/:id" do %>
+  <%= label_tag :name %><br>
+  <%= text_field_tag :name %><br><br>
+  <%= label_tag :street_address %><br>
+  <%= text_area_tag :street_address %><br><br>
+  <%= label_tag :city %><br>
+  <%= text_field_tag :city %><br><br>
+  <%= label_tag :state %><br>
+  <%= text_field_tag :state %><br><br>
+  <%= label_tag :zip %><br>
+  <%= text_field_tag :zip %><br><br>
+  <%= submit_tag "Create User" %>
+<% end %>

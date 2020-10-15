@@ -11,7 +11,14 @@ describe "As a visitor" do
         zip: "80110"
         })
 
-      end
+      @user = User.create({
+        name: 'Bobby',
+        street_address: '123 fake st.',
+        city: 'Fakertown',
+        state: 'CO',
+        zip: '80205'
+      })
+    end
 
     it "I see the shelter with that id including the shelter's
           name, address, city, state, and zip" do
@@ -31,7 +38,9 @@ describe "As a visitor" do
 
     it "I see a link to delete the shelter" do
       visit "/shelters/#{@shelter.id}"
-      expect(page).to have_button("Delete")
+      expect(page).to have_link("Delete Shelter")
+      click_link "Delete Shelter"
+      expect(current_path).to eq("/shelters")
     end
 
     it "I see a link to take me to that shelter's pets page" do
@@ -47,6 +56,100 @@ describe "As a visitor" do
 
       expect(page).to have_link("To Pets Index")
       expect(page).to have_link("To Shelters Index")
+    end
+
+    it "I see a list of reviews for that shelter including
+      title, rating, content, user name, and optional picture." do
+      # Without photo
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Karen",
+        picture: "",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+        })
+
+      visit "/shelters/#{@shelter.id}"
+
+       expect(page).to have_content("#{review.title}")
+       expect(page).to have_content("#{review.rating}")
+       expect(page).to have_content("#{review.content}")
+       expect(page).to have_content("#{review.user_name}")
+       expect(page).to_not have_xpath("//img[contains(@src, '#{review.picture}')]")
+    end
+
+    it "I see a list of reviews for that shelter including
+     title, rating, content, user name, and optional picture." do
+     # With photo
+
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Karen",
+        picture: "https://unsplash.com/photos/ethVHUKAaEI",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+      })
+
+      visit "/shelters/#{@shelter.id}"
+
+      expect(page).to have_content("#{review.title}")
+      expect(page).to have_content("#{review.rating}")
+      expect(page).to have_content("#{review.content}")
+      expect(page).to have_content("#{review.user_name}")
+      expect(page).to have_xpath("//img[contains(@src, '#{review.picture}')]")
+      end
+
+    it "I see a link to add a new reivew.  When I click this link
+      I am taken to a new review path" do
+      visit "/shelters/#{@shelter.id}"
+
+      expect(page).to have_link("Leave a Review")
+      click_link("Leave a Review")
+      expect(current_path).to eq("/shelters/#{@shelter.id}/review/new")
+    end
+
+    it "I see a link to edit the shelter review next to each review. When I click
+        this link, I am taken to an edit shelter review path" do
+
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Cat Lady",
+        picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+      })
+
+      visit "/shelters/#{@shelter.id}"
+      expect(page).to have_link("Edit Review")
+      click_on("Edit Review")
+      expect(current_path).to eq("/shelters/#{@shelter.id}/review/#{review.id}/edit")
+    end
+
+    it "I see a link next to each shelter review to delete the review." do
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Carole",
+        picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+        })
+        visit "/shelters/#{@shelter.id}"
+        expect(page).to have_link("Delete Review")
+        click_link("Delete Review")
+
+        expect(page).to_not have_content("#{review.title}")
+        expect(page).to_not have_content("#{review.rating}")
+        expect(page).to_not have_content("#{review.content}")
+        expect(page).to_not have_content("#{review.user_name}")
+        expect(page).to_not have_content("#{review.picture}")
     end
   end
 end

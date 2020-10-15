@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_10_023452) do
+ActiveRecord::Schema.define(version: 2020_10_13_214123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 2020_10_10_023452) do
     t.index ["shelter_id"], name: "index_pets_on_shelter_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.integer "rating"
+    t.string "content"
+    t.string "user_name"
+    t.bigint "shelter_id"
+    t.bigint "user_id"
+    t.string "picture"
+    t.index ["shelter_id"], name: "index_reviews_on_shelter_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "shelters", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -33,5 +45,15 @@ ActiveRecord::Schema.define(version: 2020_10_10_023452) do
     t.string "zip"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "street_address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+  end
+
   add_foreign_key "pets", "shelters"
+  add_foreign_key "reviews", "shelters"
+  add_foreign_key "reviews", "users"
 end
