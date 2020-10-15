@@ -12,7 +12,7 @@ describe "As a visitor" do
         })
     end
 
-    xit "When on the new review page, I see a form where I must enter title,
+    it "When on the new review page, I see a form where I must enter title,
         rating, content, user name" do
       user = User.create({
         name: 'Bobby',

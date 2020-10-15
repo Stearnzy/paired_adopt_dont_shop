@@ -63,10 +63,10 @@ describe "As a visitor" do
         title: "Great Place!",
         rating: 4,
         content: "Friendly staff, clean establishment",
-        user_name: "Cat Lady",
+        user_name: "Karen",
         picture: "",
-        shelter_id: "#{@shelter.id}"
-        #user_id: "#@user.id"
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
         })
 
       visit "/shelters/#{@shelter.id}"
@@ -86,10 +86,10 @@ describe "As a visitor" do
         title: "Great Place!",
         rating: 4,
         content: "Friendly staff, clean establishment",
-        user_name: "Cat Lady",
+        user_name: "Karen",
         picture: "https://unsplash.com/photos/ethVHUKAaEI",
-        shelter_id: "#{@shelter.id}"
-        # user_id: "#{@user.id}"
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
       })
 
       visit "/shelters/#{@shelter.id}"
@@ -119,8 +119,8 @@ describe "As a visitor" do
         content: "Friendly staff, clean establishment",
         user_name: "Cat Lady",
         picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
-        shelter_id: "#{@shelter.id}"
-        # user_id: "#{@user.id}"
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
       })
 
       visit "/shelters/#{@shelter.id}"
@@ -136,8 +136,8 @@ describe "As a visitor" do
         content: "Friendly staff, clean establishment",
         user_name: "Carole",
         picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
-        shelter_id: "#{@shelter.id}"
-        # user_id: "#{@user.id}"
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
         })
         visit "/shelters/#{@shelter.id}"
         expect(page).to have_link("Delete Review")

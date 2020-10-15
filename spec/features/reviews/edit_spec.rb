@@ -10,14 +10,22 @@ describe "As a user" do
       zip: "80110"
       })
 
+    user = User.create({
+      name: 'Bobby',
+      street_address: '123 fake st.',
+      city: 'Fakertown',
+      state: 'CO',
+      zip: '80205'
+    })
+
     review = Review.create!({
       title: "Great Place!",
       rating: 4,
       content: "Friendly staff, clean establishment",
       user_name: "Cat Lady",
       picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
-      shelter_id: "#{shelter.id}"
-      # user_id: "#{@user.id}"
+      shelter_id: "#{shelter.id}",
+      user_id: "#{user.id}"
     })
 
     visit "/shelters/#{shelter.id}/review/#{review.id}/edit"
