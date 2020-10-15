@@ -11,13 +11,14 @@
 
 <h3>Reviews</h3>
 <% @reviews.each do |review| %>
-  <h4><%= review.title %></h4>
-  <h6><%= review.user_name %>: <%= review.rating %></h6>
-  <p><%= review.content %></p>
-  <% if review.picture != "" %>
-    <%= image_tag(review.picture, width:'30%') %>
-  <% end %><br>
-  <%= link_to "Edit Review", "/shelters/#{@shelter.id}/review/#{review.id}/edit" %>
+<h4><%= review.title %></h4>
+<h6><%= review.user_name %>: <%= review.rating %></h6>
+<p><%= review.content %></p>
+<% if review.picture != "" %>
+<%= image_tag(review.picture, width:'30%') %>
+<% end %><br>
+<%= link_to "Edit Review", "/shelters/#{@shelter.id}/review/#{review.id}/edit" %>
+<%= link_to "Delete Review", "/shelters/#{@shelter.id}" %>
 <% end %><br><br>
 
 <a href="/shelters/<%= @shelter.id %>/edit">Update Shelter</a><br><br>
@@ -25,5 +26,5 @@
 <form action="/shelters/<%= @shelter.id %>" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" name="" value="Delete"/>
+  <input type="submit" name="" value="Delete" />
 </form>
