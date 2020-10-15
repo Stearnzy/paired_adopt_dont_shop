@@ -1,6 +1,6 @@
 describe "As a user" do
   describe "When I click on a review edit link" do
-    it "I am taken to an edit shelter review page where I see a form that includes
+    xit "I am taken to an edit shelter review page where I see a form that includes
     that review's pre populated title, rating, content, image, and user name" do
     shelter = Shelter.create({
       name: "Crazy Cat Lady's",
@@ -22,7 +22,7 @@ describe "As a user" do
       title: "Great Place!",
       rating: 4,
       content: "Friendly staff, clean establishment",
-      user_name: "Cat Lady",
+      user_name: "Karen",
       picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
       shelter_id: "#{shelter.id}",
       user_id: "#{user.id}"
@@ -42,6 +42,10 @@ describe "As a user" do
 
     click_button('Submit')
     expect(current_path).to eq("/shelters/#{shelter.id}")
+
+      within "#name-review" do
+        expect(page).to have_content("5")
+      end
     end
   end
 end

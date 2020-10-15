@@ -12,11 +12,11 @@
 <h3>Reviews</h3>
 <% @reviews.each do |review| %>
   <h4><%= review.title %></h4>
-  <h6><%= review.user_name %>: <%= review.rating %></h6>
+  <h5 id="name-review"><%= review.user_name %>: <%= review.rating %></h5>
   <p><%= review.content %></p>
-  <% if review.picture != "" %>
+  <p><% if review.picture != "" %>
     <%= image_tag(review.picture, width:'30%') %>
-  <% end %><br>
+  <% end %></p><br>
   <%= link_to "Edit Review", "/shelters/#{@shelter.id}/review/#{review.id}/edit" %><br>
   <%= link_to "Delete Review", "/shelters/#{@shelter.id}/review/#{review.id}", method: "delete" %>
 <% end %><br><br>
