@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   # Reviews Controller path
   get '/shelters/:shelter_id/review/new', to: 'reviews#new'
   post '/shelters/:shelter_id', to: 'reviews#create'
+  get '/shelters/:shelter_id/review/:review_id/edit', to: 'reviews#edit'
 end
