@@ -33,19 +33,25 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    review = Review.find(params[:review_id])
-    review.update({
+    @shelter = Shelter.find(params[:shelter_id])
+    @review = Review.find(params[:review_id])
+    @user = User.find_by(params[id: @review.user_id])
+    @review.assign_attributes({
       title: params[:title],
       rating: params[:rating],
       content: params[:content],
       picture: params[:picture],
       shelter_id: params[:shelter_id],
-      user_id: params[:user_id]
+      user_id: @user.id
       })
 
-    shelter_id = review.shelter_id
-
-    redirect_to "/shelters/#{shelter_id}"
+    if @review.save
+      redirect_to "/shelters/#{@review.shelter_id}" 
+    else
+      # @review.title == "" || @review.rating == "" || @review.content == ""
+      flash[:notice] = "Please fill in title, rating, and content before submitting."
+      render :edit
+    end
   end
 
   def destroy
