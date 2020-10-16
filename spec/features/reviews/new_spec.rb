@@ -10,24 +10,25 @@ describe "As a visitor" do
         state: "CO",
         zip: "80110"
         })
-    end
 
-    it "When on the new review page, I see a form where I must enter title,
-        rating, content, user name" do
-      user = User.create({
+      @user = User.create({
         name: 'Bobby',
         street_address: '123 fake st.',
         city: 'Fakertown',
         state: 'CO',
         zip: '80205'
-      })
+        })
+    end
+
+    it "When on the new review page, I see a form where I must enter title,
+        rating, content, user name" do
 
       visit "/shelters/#{@shelter.id}/review/new"
 
       fill_in "title", with: "Great place!"
       fill_in "rating", with: 4
       fill_in "content", with: "Can't wait to come back! Louis was awesome!"
-      fill_in "user_name", with: "#{user.name}"
+      fill_in "user_name", with: "#{@user.name}"
 
       click_button "Submit"
 
@@ -36,6 +37,23 @@ describe "As a visitor" do
       expect(page).to have_content("4")
       expect(page).to have_content("Can't wait to come back! Louis was awesome!")
       expect(page).to have_content("Bobby")
+    end
+
+    describe "I fail to enter a title, a rating, and/or content in the new review form
+          but still try to submit" do
+      it "I see a flash message indicating that I need to fill in the missing content
+          and I'm returned to the new form" do
+
+        visit "/shelters/#{@shelter.id}/review/new}"
+
+        fill_in "title", with: "Love this place"
+        fill_in "content", with: "Can't wait to come back"
+
+        click_button "Submit"
+
+        expect(page).to have_content("Review not submitted - title, rating and content required.")
+        expect(current_path).to eq.("/shelters/#{@shelter.id}/review/new")
+      end
     end
   end
 end
