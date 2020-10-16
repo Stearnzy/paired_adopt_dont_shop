@@ -54,5 +54,21 @@ describe "As a visitor" do
         expect(page).to have_content("Review not submitted - title, rating and content required.")
         expect(page).to have_button("Submit")
     end
+
+    it "I enter the name of a User that doesn't exist in the database and I see a
+        flash message indicating the user couldn't be found" do
+
+      visit "/shelters/#{@shelter.id}/review/new"
+
+      fill_in "user_name", with: "Steven"
+      fill_in "title", with: "Incredible"
+      fill_in "rating", with: 4
+      fill_in "content", with: "Love all the rescued animals!"
+
+      click_button "Submit"
+
+      expect(page).to have_content("User name does not exist. Please enter a valid user's name.")
+      expect(page).to have_button("Submit")
+    end
   end
 end
