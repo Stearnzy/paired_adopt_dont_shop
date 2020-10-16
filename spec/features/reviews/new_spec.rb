@@ -39,21 +39,20 @@ describe "As a visitor" do
       expect(page).to have_content("Bobby")
     end
 
-    describe "I fail to enter a title, a rating, and/or content in the new review form
-          but still try to submit" do
-      it "I see a flash message indicating that I need to fill in the missing content
-          and I'm returned to the new form" do
+    it "I fail to enter a title, a rating, and/or content in the new review form
+          but still try to submit, I see a flash message indicating that I need
+          to fill in the missing content and I'm returned to the new form" do
 
-        visit "/shelters/#{@shelter.id}/review/new}"
+        visit "/shelters/#{@shelter.id}/review/new"
 
         fill_in "title", with: "Love this place"
-        fill_in "content", with: "Can't wait to come back"
+        fill_in "rating", with: 5
+        fill_in "user_name", with: "#{@user.name}"
 
         click_button "Submit"
 
         expect(page).to have_content("Review not submitted - title, rating and content required.")
-        expect(current_path).to eq.("/shelters/#{@shelter.id}/review/new")
-      end
+        expect(page).to have_button("Submit")
     end
   end
 end
