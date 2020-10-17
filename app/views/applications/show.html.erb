@@ -1,9 +1,13 @@
 <a>Application for Adoption</a>
 
 <h2><%= @application.user.name %></h2>
-<h2><%= @application.user.street_address %></h2>
+<p><%= @application.user.street_address %><br>
+  <%= @application.user.city %>, <%= @application.user.state %>
+  <%= @application.user.zip %></p>
 <p><%= @application.description %></p>
 <p><%= @application.application_status %></p>
-<% @application.pets.each do |pet| %>
-  <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+<% if @application.pets.count != 0 %>
+  <% @application.pets.each do |pet| %>
+    <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+  <% end %>
 <% end %>
