@@ -4,11 +4,11 @@ describe "As a visitor" do
   describe "When I visit '/shelters/:shelter_id/pets'" do
     before(:each) do
       @shelter_1 = Shelter.create({
-            name: "Crazy Cat Lady's",
-            address: "123 Litterbox Way",
-            city: "Littleton",
-            state: "CO",
-            zip: "80110"
+        name: "Crazy Cat Lady's",
+        address: "123 Litterbox Way",
+        city: "Littleton",
+        state: "CO",
+        zip: "80110"
         })
 
       @pet_1 = Pet.create({
