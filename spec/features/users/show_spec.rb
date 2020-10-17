@@ -78,5 +78,24 @@ describe "As a visitor" do
 
       expect(page).to have_content("Average User Rating: #{@user.review_average.round(2)}")
     end
+
+    describe "I see a section for Highlighted Reviews" do
+      it "And I see the review with the best rating this user has written, and
+      I see the review with the worst rating this user has written" do
+        visit "/users/#{@user.id}"
+
+        within "#highlighted" do
+          expect(page).to have_content("Highlighted User Reviews")
+          
+          expect(page).to have_content("#{@review_1}.title")
+          expect(page).to have_content("#{@review_1}.rating")
+          expect(page).to have_content("#{@review_1}.content")
+
+          expect(page).to have_content("#{@review_3}.title")
+          expect(page).to have_content("#{@review_3}.rating")
+          expect(page).to have_content("#{@review_3}.content")
+        end
+      end
+    end
   end
 end
