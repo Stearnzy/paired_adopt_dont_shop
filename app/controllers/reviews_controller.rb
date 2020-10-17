@@ -41,7 +41,6 @@ class ReviewsController < ApplicationController
   def update
     @shelter = Shelter.find(params[:shelter_id])
     @review = Review.find(params[:review_id])
-    # require 'pry'; binding.pry
     @user = User.find_by(name: params[:user_name])
     @review.assign_attributes({
       title: params[:title],
