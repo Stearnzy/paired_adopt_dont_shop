@@ -1,4 +1,7 @@
 <h1><%= @user.name %></h1>
+
+<h3>Average User Rating: <%= @user.review_average.round(2) %></h3>
+
 <p><%= @user.street_address %><br>
   <%= @user.city %>, <%= @user.state %> <%= @user.zip %>
 </p>
