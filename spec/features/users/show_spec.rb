@@ -86,14 +86,18 @@ describe "As a visitor" do
 
         within "#highlighted" do
           expect(page).to have_content("Highlighted User Reviews")
+        end
 
-          expect(page).to have_content("#{@review_1}.title")
-          expect(page).to have_content("#{@review_1}.rating")
-          expect(page).to have_content("#{@review_1}.content")
+        within "#best-review" do
+          expect(page).to have_content("#{@review_1.title}")
+          expect(page).to have_content("#{@review_1.rating}")
+          expect(page).to have_content("#{@review_1.content}")
+        end
 
-          expect(page).to have_content("#{@review_3}.title")
-          expect(page).to have_content("#{@review_3}.rating")
-          expect(page).to have_content("#{@review_3}.content")
+        within "#worst-review" do
+          expect(page).to have_content("#{@review_3.title}")
+          expect(page).to have_content("#{@review_3.rating}")
+          expect(page).to have_content("#{@review_3.content}")
         end
       end
     end
