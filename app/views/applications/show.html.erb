@@ -4,6 +4,7 @@
 <h2><%= @application.user.street_address %></h2>
 <p><%= @application.description %></p>
 <p><%= @application.application_status %></p>
-<% @application.pets.each do |pet| %>
-  <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+<p>Add a Pet to this Application</p>
+  <% @application.pets.each do |pet| %>
+<p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
 <% end %>
