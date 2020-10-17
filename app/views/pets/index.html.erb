@@ -2,6 +2,8 @@
 
 <h1>Furry Friends Needing a Home</h1>
 
+<%= link_to "Start an Application", "/applications/new" %>
+
 <% @pets.each do |pet| %>
   <h2><a href="/pets/<%= pet.id %>"><%= pet.name %></a></h2>
   <img src="<%= pet.image %>" alt="<% pet.name %>" width="30%">
