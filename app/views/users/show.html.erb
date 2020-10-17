@@ -4,19 +4,21 @@
   <%= @user.city %>, <%= @user.state %> <%= @user.zip %>
 </p>
 
-<h2>Average User Rating: <%= @user.review_average %></h2><br>
+<% if @user.reviews.count > 1 %>
+  <h2>Average User Rating: <%= @user.review_average.round(2) %></h2><br>
 
-<section id="highlighted">
-  <h3>Highlighted User Reviews</h3>
-    <div id="best-review">
-      <h4>Best Review</h4>
-      <p><b><%= @user.best_review.title %>: <%= @user.best_review.rating %></b><br>
-      <%= @user.best_review.content %></p>
-    </div>
+  <section id="highlighted">
+    <h3>Highlighted User Reviews</h3>
+      <div id="best-review">
+        <h4>Best Review</h4>
+        <p><b><%= @user.best_review.title %>: <%= @user.best_review.rating %></b><br>
+        <%= @user.best_review.content %></p>
+      </div>
 
-    <div id="worst-review">
-      <h4>Worst Review</h4>
-      <p><b><%= @user.worst_review.title %>: <%= @user.worst_review.rating %></b><br>
-      <%= @user.worst_review.content %></p>
-    </div>
-</section>
+      <div id="worst-review">
+        <h4>Worst Review</h4>
+        <p><b><%= @user.worst_review.title %>: <%= @user.worst_review.rating %></b><br>
+        <%= @user.worst_review.content %></p>
+      </div>
+  </section>
+<% end %>
