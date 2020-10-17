@@ -80,7 +80,7 @@ describe "As a visitor" do
     end
 
     describe "I see a section for Highlighted Reviews" do
-      it "And I see the review with the best rating this user has written, and
+      xit "And I see the review with the best rating this user has written, and
         I see the review with the worst rating this user has written" do
         visit "/users/#{@user.id}"
 
