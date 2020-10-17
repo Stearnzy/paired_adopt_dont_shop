@@ -5,4 +5,12 @@ class User < ApplicationRecord
   def review_average
     reviews.average(:rating)
   end
+
+  def worst_review
+    reviews.order(:rating).first
+  end
+
+  def best_review
+    reviews.order(rating: :desc).first
+  end
 end
