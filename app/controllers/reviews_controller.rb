@@ -35,20 +35,24 @@ class ReviewsController < ApplicationController
   def update
     @shelter = Shelter.find(params[:shelter_id])
     @review = Review.find(params[:review_id])
-    @user = User.find_by(params[id: @review.user_id])
+    # require 'pry'; binding.pry
+    @user = User.find_by(name: params[:user_name])
     @review.assign_attributes({
       title: params[:title],
       rating: params[:rating],
       content: params[:content],
       picture: params[:picture],
       shelter_id: params[:shelter_id],
-      user_id: @user.id
+      user_name: params[:user_name]
       })
 
-    if @review.save
+    if @user.nil?
+      flash[:notice] = "Please fill in a valid user name."
+      render :edit    
+    elsif @review.valid?
+      @review.save
       redirect_to "/shelters/#{@review.shelter_id}" 
     else
-      # @review.title == "" || @review.rating == "" || @review.content == ""
       flash[:notice] = "Please fill in title, rating, and content before submitting."
       render :edit
     end

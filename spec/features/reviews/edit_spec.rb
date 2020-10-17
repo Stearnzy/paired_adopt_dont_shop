@@ -1,6 +1,8 @@
+require 'rails_helper'
+
 describe "As a user" do
   describe "When I click on a review edit link" do
-    it "I am taken to an edit shelter review page where I see a form that includes
+    xit "I am taken to an edit shelter review page where I see a form that includes
     that review's pre populated title, rating, content, image, and user name" do
     shelter = Shelter.create({
       name: "Crazy Cat Lady's",
@@ -49,7 +51,7 @@ describe "As a user" do
     end
 
     describe "When I visit the page to edit a review" do
-      it "And I fail to enter a title, a rating, and/or content in the edit 
+      xit "And I fail to enter a title, a rating, and/or content in the edit 
       shelter review form, but still try to submit the form
       I see a flash message indicating that I need to fill in a title, 
       rating, and content in order to edit a shelter review
@@ -90,7 +92,47 @@ describe "As a user" do
       
       expect(page).to have_content("Please fill in title, rating, and content before submitting.")  
       expect(page).to have_button('Submit')
-      save_and_open_page
+      end
+
+      it "I enter the name of a User that doesn't exist in the database, 
+      but still try to submit the form I see a flash message indicating 
+      that the User couldn't be found
+      And I'm returned to the new form to create a new review" do
+
+      shelter = Shelter.create!({
+        name: "Crazy Cat Lady's",
+        address: "123 Litterbox Way",
+        city: "Littleton",
+        state: "CO",
+        zip: "80110"
+      })
+
+      user = User.create!({
+        name: 'Bobby',
+        street_address: '123 fake st.',
+        city: 'Fakertown',
+        state: 'CO',
+        zip: '80205'
+      })
+
+      review = Review.create!({
+        title: "Great Place!",
+        rating: 4,
+        content: "Friendly staff, clean establishment",
+        user_name: "Bobby",
+        picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
+        shelter_id: "#{shelter.id}",
+        user_id: "#{user.id}"
+      })
+        # require 'pry'; binding.pry
+      visit "/shelters/#{shelter.id}/review/#{review.id}/edit"
+
+      fill_in 'user_name', with: "Todd"
+
+      click_button('Submit')
+      
+      expect(page).to have_content("Please fill in a valid user name.")  
+      expect(page).to have_button('Submit')
       end
     end  
   end
