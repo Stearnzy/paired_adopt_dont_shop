@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "As a visitor" do
   describe "When I am taken to '/users/new'" do
-    xit "I see a form for a new user to enter name and address" do
+    it "I see a form for a new user to enter name and address" do
       visit "/users/new"
 
       fill_in "Name", with: "Harry Potter"

@@ -73,14 +73,14 @@ describe "As a visitor" do
       expect(page).to have_content("#{@user.zip}")
     end
 
-    xit "I see the average rating of all of their reviews" do
+    it "I see the average rating of all of their reviews" do
       visit "/users/#{@user.id}"
 
       expect(page).to have_content("Average User Rating: #{@user.review_average.round(2)}")
     end
 
     describe "I see a section for Highlighted Reviews" do
-      xit "And I see the review with the best rating this user has written, and
+      it "And I see the review with the best rating this user has written, and
         I see the review with the worst rating this user has written" do
         visit "/users/#{@user.id}"
 

@@ -97,5 +97,13 @@ describe "As a visitor" do
 
       expect(page).to have_link("To Shelters Index")
     end
+
+    it "I see a link to 'Start an Application' that takes me to the new application page" do
+      visit "/pets"
+
+      expect(page).to have_link("Start an Application")
+      click_link("Start an Application")
+      expect(current_path).to eq("/applications/new")
+    end
   end
 end
