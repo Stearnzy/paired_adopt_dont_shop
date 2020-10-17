@@ -53,7 +53,7 @@ describe "As a visitor" do
         user_id: "#{@user.id}"
         })
 
-      @review_ = Review.create!({
+      @review_3 = Review.create!({
         user_name: "Bobby",
         title: "Bird crap everywhere",
         rating: 1,
@@ -81,12 +81,12 @@ describe "As a visitor" do
 
     describe "I see a section for Highlighted Reviews" do
       it "And I see the review with the best rating this user has written, and
-      I see the review with the worst rating this user has written" do
+        I see the review with the worst rating this user has written" do
         visit "/users/#{@user.id}"
 
         within "#highlighted" do
           expect(page).to have_content("Highlighted User Reviews")
-          
+
           expect(page).to have_content("#{@review_1}.title")
           expect(page).to have_content("#{@review_1}.rating")
           expect(page).to have_content("#{@review_1}.content")
