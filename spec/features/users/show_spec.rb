@@ -10,6 +10,57 @@ describe "As a visitor" do
         state: 'CO',
         zip: '80205'
       })
+
+      @shelter_1 = Shelter.create({
+        name: "Crazy Cat Lady's",
+        address: "123 Litterbox Way",
+        city: "Littleton",
+        state: "CO",
+        zip: "80110"
+        })
+
+      @shelter_2 = Shelter.create({
+        name: "Danny's Dogs",
+        address: "123 Bark Rd",
+        city: "Littleton",
+        state: "CO",
+        zip: "80110"
+        })
+
+      @shelter_3 = Shelter.create({
+        name: "Perky Parakeets",
+        address: "123 Tropicana St",
+        city: "Littleton",
+        state: "CO",
+        zip: "80110"
+        })
+
+      @review_1 = Review.create!({
+        user_name: "Bobby",
+        title: "Love this place",
+        rating: 5,
+        content: "Great staff all around",
+        shelter_id: "#{@shelter_1.id}",
+        user_id: "#{@user.id}"
+        })
+
+      @review_2 = Review.create!({
+        user_name: "Bobby",
+        title: "Dogs are OK",
+        rating: 2,
+        content: "One peed on my leg",
+        shelter_id: "#{@shelter_2.id}",
+        user_id: "#{@user.id}"
+        })
+
+      @review_ = Review.create!({
+        user_name: "Bobby",
+        title: "Bird crap everywhere",
+        rating: 1,
+        content: "Worst ever.",
+        shelter_id: "#{@shelter_3.id}",
+        user_id: "#{@user.id}"
+        })
     end
 
     it "I see all that User's information" do
@@ -20,6 +71,12 @@ describe "As a visitor" do
       expect(page).to have_content("#{@user.city}")
       expect(page).to have_content("#{@user.state}")
       expect(page).to have_content("#{@user.zip}")
+    end
+
+    it "I see the average rating of all of their reviews" do
+      visit "/users/#{@user.id}"
+
+      expect(page).to have_content("Average User Rating: 2.66")
     end
   end
 end
