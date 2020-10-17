@@ -1,0 +1,9 @@
+<a>Application for Adoption</a>
+
+<h2><%= @application.user.name %></h2>
+<h2><%= @application.user.street_address %></h2>
+<p><%= @application.description %></p>
+<p><%= @application.application_status %></p>
+<% @application.pets.each do |pet| %>
+  <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+<% end %>

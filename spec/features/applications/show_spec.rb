@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "As a visitor" do
-  describe "When I visit an applications show page "/applications/:id"" do
+  describe "When I visit an applications show page /applications/:id" do
     before(:each) do
 
       @shelter_1 = Shelter.create({
@@ -61,6 +61,12 @@ describe "As a visitor" do
         state: 'CO',
         zip: '80113'
       })
+
+      @application_1 = Application.create(
+        description: 'I love animals',
+        application_status: 'In progress',
+        user_id: @user_1.id 
+      )
       
     end 
       it "Then I can see the following:
@@ -68,24 +74,32 @@ describe "As a visitor" do
         - Full Address of the User on the Application
         - Description of why the applicant says they'd be a good home for this pet(s)
         - names of all pets that this application is for (all names of pets should be links to their show page)
-        - The Application's status, either "In Progress", "Pending", "Accepted", or "Rejected"" do
+        - The Application's status, either In Progress, Pending, Accepted, or Rejected" do
        
-      Application.create!(
-        user_id: @user_1.id,
+      PetApplication.create!(
+        application_id: @application_1.id,
         pet_id: @pet_1.id 
       )
       
-      Application.create!(
-        user_id: @user_1.id,
+      PetApplication.create!(
+        application_id: @application_1.id,
         pet_id: @pet_2.id 
       )
       
-      Application.create!(
-        user_id: @user_1.id,
+      PetApplication.create!(
+        application_id: @application_1.id,
         pet_id: @pet_3.id 
       )
 
-      visit "/applications/#{}"
+      visit "/applications/#{@application_1.id}"
+
+      expect(page).to have_content("#{@user_1.name}")
+      expect(page).to have_content("#{@user_1.street_address}")
+      expect(page).to have_content("#{@application_1.description}")
+      expect(page).to have_link("#{@pet_1.name}")
+      expect(page).to have_link("#{@pet_2.name}")
+      expect(page).to have_link("#{@pet_3.name}")
+      expect(page).to have_content("#{@application_1.application_status}")
     end
   end
 end
