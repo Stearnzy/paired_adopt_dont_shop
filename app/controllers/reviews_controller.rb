@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
 
   def create
     @shelter = Shelter.find(params[:shelter_id])
-    review = Review.new({
+    @review = Review.new({
       user_name: params[:user_name],
       title: params[:title],
       rating: params[:rating],
@@ -15,15 +15,21 @@ class ReviewsController < ApplicationController
       user_id: params[:user_id]
       })
 
-    @user = User.where(name: review.user_name)
+    @user = User.where(name: @review.user_name)
+    creation_validation
+  end
 
+  def creation_validation
     if @user == []
       flash[:notice] = "User name does not exist. Please enter a valid user's name."
       render :new
+    elsif @user != [] && @review.title == "" || @review.rating == nil || @review.content == ""
+      flash[:notice] = "Review not submitted - title, rating and content required."
+      render :new
     else
-      review.user_id = @user[0].id
-      review.save
-      redirect_to "/shelters/#{review.shelter.id}"
+      @review.user_id = @user[0].id
+      @review.save
+      redirect_to "/shelters/#{@review.shelter.id}"
     end
   end
 
