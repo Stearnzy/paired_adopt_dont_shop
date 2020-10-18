@@ -48,7 +48,7 @@ describe "As a visitor" do
 
       @application_1 = Application.create(
         user_id: @user_1.id,
-        application_status: 'In progress',
+        application_status: 'In Progress',
         pets: []
       )
     end

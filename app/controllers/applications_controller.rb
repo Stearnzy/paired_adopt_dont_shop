@@ -35,14 +35,13 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    require "pry"; binding.pry
-    application = Application.find(params[:id])
-    application.update!({
-      user_id: params[:user_id],
+    @application = Application.find(params[:id])
+    @application.update!({
       description: params[:description],
       application_status: "Pending",
-      pets: params[:pets]
+      pets: @application.pets.uniq
       })
-      require "pry"; binding.pry
+
+    redirect_to "/applications/#{@application.id}"
   end
 end

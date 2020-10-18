@@ -43,15 +43,12 @@
   <% end %>
 </section><br>
 
-<% if @application.pets.count != 0 %>
+<% if @application.pets.count != 0 && @application.application_status == "In Progress" %>
   <section>
-    <form action=<%= "/applications/#{@application.id}" %> method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="_method" value="PUT" />
-      <input type='textarea' name='application[description]'/>
-      <input type='submit' value='Submit Application' name='Submit Application'/>
-    </form>
-
-
+    <%= form_tag "/applications/#{@application.id}", method: 'put' do %>
+      <%= label_tag "Why you would make a good owner:" %><br>
+      <%= text_area_tag "description" %>
+      <%= submit_tag "Submit Application" %>
+    <% end %>
   </section>
 <% end %>
