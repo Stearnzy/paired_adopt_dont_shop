@@ -21,8 +21,10 @@
   <%= submit_tag 'Search' %>
 <% end %><br>
 
-<% if @pet_results != [] %>
-  <% @pet_results.each do |pet| %>
-    <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+<section id="search-results">
+  <% if @pet_results != [] %>
+    <% @pet_results.each do |pet| %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+    <% end %>
   <% end %>
-<% end %>
+</section>
