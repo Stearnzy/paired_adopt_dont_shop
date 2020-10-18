@@ -63,7 +63,6 @@ describe "As a visitor" do
       })
 
       @application_1 = Application.create(
-        description: 'I love animals',
         application_status: 'In progress',
         user_id: @user_1.id
       )
