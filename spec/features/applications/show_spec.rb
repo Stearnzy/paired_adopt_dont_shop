@@ -122,6 +122,7 @@ describe "As a visitor" do
       expect(page).to have_content("#{user.city}")
       expect(page).to have_content("#{user.state}")
       expect(page).to have_content("#{user.zip}")
+      expect(page).to have_content("In Progress")
     end
 
     describe "And that application has not been submitted," do
@@ -140,12 +141,13 @@ describe "As a visitor" do
         visit "/applications/#{@application_1.id}"
 
         expect(page).to have_content("Add a Pet to this Application")
-save_and_open_page
+
         expect(page).to_not have_content("Lizzie")
 
         fill_in :search_by_name, with: "Lizzie"
         click_button("Search")
 
+        expect(current_path).to eq("/applications/#{@application_1.id}")
         expect(page).to have_content("Lizzie")
       end
     end
