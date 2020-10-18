@@ -67,22 +67,6 @@ describe "As a visitor" do
         application_status: 'In progress',
         user_id: @user_1.id
       )
-
-      @petapp_1 = PetApplication.create!(
-        application_id: @application_1.id,
-        pet_id: @pet_1.id
-      )
-
-      @petapp_2 = PetApplication.create!(
-        application_id: @application_1.id,
-        pet_id: @pet_2.id
-      )
-
-      @petapp_3 = PetApplication.create!(
-        application_id: @application_1.id,
-        pet_id: @pet_3.id
-      )
-
     end
       it "Then I can see the following:
         - Name of the User on the Application
@@ -90,6 +74,21 @@ describe "As a visitor" do
         - Description of why the applicant says they'd be a good home for this pet(s)
         - names of all pets that this application is for (all names of pets should be links to their show page)
         - The Application's status, either In Progress, Pending, Accepted, or Rejected" do
+
+      petapp_1 = PetApplication.create!(
+        application_id: @application_1.id,
+        pet_id: @pet_1.id
+      )
+
+      petapp_2 = PetApplication.create!(
+        application_id: @application_1.id,
+        pet_id: @pet_2.id
+      )
+
+      petapp_3 = PetApplication.create!(
+        application_id: @application_1.id,
+        pet_id: @pet_3.id
+      )
 
       visit "/applications/#{@application_1.id}"
 
@@ -132,15 +131,17 @@ describe "As a visitor" do
         And I click submit,
         Then I am taken back to the application show page
         And under the search bar I see any Pet whose name matches my search' do
-        
+
         visit "/applications/new"
-        
+
         fill_in "user_name", with: "#{@user_1.name}"
         click_on "Submit"
 
         visit "/applications/#{@application_1.id}"
 
         expect(page).to have_content("Add a Pet to this Application")
+save_and_open_page
+        expect(page).to_not have_content("Lizzie")
 
         fill_in :search_by_name, with: "Lizzie"
         click_button("Search")
