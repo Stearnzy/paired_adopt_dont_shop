@@ -9,7 +9,7 @@ class ApplicationsController < ApplicationController
       description: nil,
       application_status: "In Progress",
       pets: []
-      })
+    })
     @application.save
     redirect_to "/applications/#{@application.id}"
   end

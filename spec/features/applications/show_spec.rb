@@ -68,17 +68,17 @@ describe "As a visitor" do
         user_id: @user_1.id
       )
 
-      petapp_1 = PetApplication.create!(
+      @petapp_1 = PetApplication.create!(
         application_id: @application_1.id,
         pet_id: @pet_1.id
       )
 
-      petapp_2 = PetApplication.create!(
+      @petapp_2 = PetApplication.create!(
         application_id: @application_1.id,
         pet_id: @pet_2.id
       )
 
-      petapp_3 = PetApplication.create!(
+      @petapp_3 = PetApplication.create!(
         application_id: @application_1.id,
         pet_id: @pet_3.id
       )
@@ -132,7 +132,20 @@ describe "As a visitor" do
         And I click submit,
         Then I am taken back to the application show page
         And under the search bar I see any Pet whose name matches my search' do
+        
+        visit "/applications/new"
+        
+        fill_in "user_name", with: "#{@user_1.name}"
+        click_on "Submit"
 
+        visit "/applications/#{@application_1.id}"
+
+        expect(page).to have_content("Add a Pet to this Application")
+
+        fill_in :search_by_name, with: "Lizzie"
+        click_button("Search")
+
+        expect(page).to have_content("Lizzie")
       end
     end
   end
