@@ -33,4 +33,15 @@ class ApplicationsController < ApplicationController
       @pet_results = @pets.where("lower(name) like ?", "%#{params[:search_by_name]}%".downcase)
     end
   end
+
+  def update
+    @application = Application.find(params[:id])
+    @application.update({
+      user_id: params[:user_id],
+      description: params[:description],
+      application_status: "Pending",
+      pets: params[:pets]
+      })
+require "pry"; binding.pry
+  end
 end

@@ -1,13 +1,15 @@
 <a>Application for Adoption</a>
 
-<h2><%= @application.user.name %></h2>
+<section id="application-info">
+  <h2><%= @application.user.name %></h2>
 
-<p><%= @application.user.street_address %><br>
-  <%= @application.user.city %>, <%= @application.user.state %>
-  <%= @application.user.zip %></p>
+  <p><%= @application.user.street_address %><br>
+    <%= @application.user.city %>, <%= @application.user.state %>
+    <%= @application.user.zip %></p>
 
-<p><i><%= @application.description %></i></p>
-<p><b><%= @application.application_status %></b></p>
+  <p><i><%= @application.description %></i></p>
+  <p><b><%= @application.application_status %></b></p>
+</section>
 
 <div id="pets-of-interest">
   <% if @application.pets.count != 0 %>
@@ -17,11 +19,15 @@
   <% end %>
 </div>
 
-<%= form_tag "/applications/#{@application.id}", method: 'get' do %>
-  Add a Pet to this Application <br>
-  <%= text_field_tag :search_by_name, params[:search_by_name], placeholder: "Search Pets by Name" %>
-  <%= submit_tag 'Search' %>
-<% end %><br>
+<% if @application.application_status == "In Progress" %>
+  <section id="search-for-pets">
+    <%= form_tag "/applications/#{@application.id}", method: 'get' do %>
+      Add a Pet to this Application <br>
+      <%= text_field_tag :search_by_name, params[:search_by_name], placeholder: "Search Pets by Name" %>
+      <%= submit_tag 'Search' %>
+    <% end %><br>
+  </section>
+<% end %>
 
 <section id="search-results">
   <% if @pet_results != [] %>
@@ -35,4 +41,14 @@
       </form>
     <% end %>
   <% end %>
-</section>
+</section><br>
+
+<% if @application.pets.count != 0 %>
+  <section>
+    <%= form_tag "/applications/#{@application.id}", method: 'put' do %>
+      <%= label_tag "Why you would make a good owner:" %><br>
+      <%= text_area_tag 'description', @application.description, rows: 4 %>
+      <%= submit_tag "Submit Application" %>
+    <% end %>
+  </section>
+<% end %>

@@ -42,4 +42,5 @@ Rails.application.routes.draw do
 
   # Pet Applications Controller
   patch '/applications/:id', to: 'pet_applications#create'
+  put '/applications/:id', to: 'applications#update'
 end
