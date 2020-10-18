@@ -64,7 +64,6 @@ describe "As a visitor" do
 
       @application_1 = Application.create(
         user_id: @user_1.id,
-        description: nil,
         application_status: 'In progress',
         pets: []
       )
@@ -163,6 +162,27 @@ describe "As a visitor" do
         within "#search-results" do
           expect(page).to have_link("#{@pet_2.name}")
           expect(page).to have_button("Adopt this Pet")
+        end
+      end
+
+      it "When I click Adopt this pet, I am taken back to the application show
+          page and see the pet I want to adopt listed on the application" do
+        visit "/applications/#{@application_1.id}"
+
+        fill_in :search_by_name, with: "#{@pet_3.name}"
+        click_button "Search"
+
+        within "#pets-of-interest" do
+          expect(page).to_not have_link("#{@pet_3.name}")
+        end
+
+        within "#search-results" do
+          click_button "Adopt this Pet"
+        end
+
+        expect(current_path).to eq("/applications/#{@application_1.id}")
+        within "#pets-of-interest" do
+          expect(page).to have_link("#{@pet_3.name}")
         end
       end
     end
