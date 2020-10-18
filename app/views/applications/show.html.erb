@@ -25,6 +25,7 @@
   <% if @pet_results != [] %>
     <% @pet_results.each do |pet| %>
       <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+      # ~~ *~ * ~~*  Was going to add button here, see Slack notes ~~ * ~* *~
     <% end %>
   <% end %>
 </section>
