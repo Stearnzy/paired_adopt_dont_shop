@@ -36,12 +36,18 @@ class ApplicationsController < ApplicationController
 
   def update
     @application = Application.find(params[:id])
-    @application.update!({
-      description: params[:description],
-      application_status: "Pending",
-      pets: @application.pets.uniq
-      })
+    
+    if params[:description] == ""
+      flash[:notice] = "Submission failed - must enter why you would make a good owner."
+      render :show
+    else
+      @application.update!({
+        description: params[:description],
+        application_status: "Pending",
+        pets: @application.pets.uniq
+        })
 
-    redirect_to "/applications/#{@application.id}"
+      redirect_to "/applications/#{@application.id}"
+    end
   end
 end

@@ -30,7 +30,7 @@
 <% end %>
 
 <section id="search-results">
-  <% if @pet_results != [] %>
+  <% if @pet_results != [] && @pet_results != nil %>
     <% @pet_results.each do |pet| %>
       <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
       <form action=<%="/applications/#{@application.id}"%> method="post">
