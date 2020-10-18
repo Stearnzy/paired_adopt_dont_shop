@@ -63,8 +63,10 @@ describe "As a visitor" do
       })
 
       @application_1 = Application.create(
+        user_id: @user_1.id,
+        description: nil,
         application_status: 'In progress',
-        user_id: @user_1.id
+        pets: []
       )
     end
       it "Then I can see the following:
@@ -147,6 +149,21 @@ describe "As a visitor" do
         expect(page).to have_content("Application for Adoption")
         expect(page).to have_content("Add a Pet to this Application")
         expect(page).to have_content("Lizzie")
+      end
+    end
+
+    describe "When I search for a Pet by name and I see the names of Pets that
+      match my search" do
+      it "Then next to each Pet's name I see a button to Adopt this Pet" do
+        visit "/applications/#{@application_1.id}"
+
+        fill_in :search_by_name, with: "#{@pet_2.name}"
+        click_button "Search"
+
+        within "#search-results" do
+          expect(page).to have_link("#{@pet_2.name}")
+          expect(page).to have_button("Adopt this Pet")
+        end
       end
     end
   end
