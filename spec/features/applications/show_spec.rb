@@ -211,5 +211,19 @@ describe "As a visitor" do
       expect(page).to_not have_field(:description)
       expect(page).to_not have_button "Submit Application"
     end
+
+    it "I have added one or more pets but fail to enter why I make a good owner,
+        I'm taken back to the show page and see flash that the field must be filled
+        before submission.  Application is still In Progress" do
+      visit "/applications/#{@application_1.id}"
+
+      fill_in :search_by_name, with: "#{@pet_2.name}"
+      click_button "Search"
+      click_button "Adopt this Pet"
+
+      click_button "Submit Application"
+      expect(page).to have_content("In Progress")
+      expect(page).to have_content("Submission failed - must enter why you would make a good owner.")
+    end
   end
 end
