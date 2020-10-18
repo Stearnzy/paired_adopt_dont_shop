@@ -1,14 +1,23 @@
 <a>Application for Adoption</a>
-
 <h2><%= @application.user.name %></h2>
 <p><%= @application.user.street_address %><br>
   <%= @application.user.city %>, <%= @application.user.state %>
   <%= @application.user.zip %></p>
 <p><%= @application.description %></p>
 <p><%= @application.application_status %></p>
-<p>Add a Pet to this Application</p>
 <% if @application.pets.count != 0 %>
-  <% @application.pets.each do |pet| %>
-    <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
-  <% end %>
+<% @application.pets.each do |pet| %>
+<p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+<% end %>
+<% end %>
+
+<%= form_tag "/applications/#{@application.id}", method: 'get' do %>
+Add a Pet to this Application <br>
+<%= text_field_tag :search_by_name, params[:search_by_name] %>
+<%= submit_tag 'Search' %>
+<% end %><br>
+<% if @pet_results != [] %>
+<% @pet_results.each do |pet| %>
+<%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+<% end %>
 <% end %>
