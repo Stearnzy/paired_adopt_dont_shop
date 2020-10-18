@@ -203,5 +203,13 @@ describe "As a visitor" do
         expect(page).to_not have_button("Search")
       end
     end
+
+    it "I have not added any pets to the application, so I do not see a section
+        to submit my application" do
+      visit "/applications/#{@application_1.id}"
+
+      expect(page).to_not have_field(:description)
+      expect(page).to_not have_button "Submit Application"
+    end
   end
 end
