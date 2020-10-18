@@ -46,22 +46,6 @@ describe "As a visitor" do
         zip: '80205'
       })
 
-      @user_2 = User.create({
-        name: 'Jessica',
-        street_address: '123 real st.',
-        city: 'Realertown',
-        state: 'CO',
-        zip: '80204'
-      })
-
-      @user_3 = User.create({
-        name: 'Steve',
-        street_address: '1234 fake st.',
-        city: 'Fakestown',
-        state: 'CO',
-        zip: '80113'
-      })
-
       @application_1 = Application.create(
         user_id: @user_1.id,
         application_status: 'In progress',
@@ -106,22 +90,14 @@ describe "As a visitor" do
         and see that application is In Progress" do
       visit "/applications/new"
 
-      user = User.create({
-        name: 'Guy',
-        street_address: '123 real st.',
-        city: 'Realertown',
-        state: 'CO',
-        zip: '80204'
-      })
-
-      fill_in "user_name", with: "#{user.name}"
+      fill_in "user_name", with: "#{@user_1.name}"
       click_on "Submit"
 
-      expect(page).to have_content("#{user.name}")
-      expect(page).to have_content("#{user.street_address}")
-      expect(page).to have_content("#{user.city}")
-      expect(page).to have_content("#{user.state}")
-      expect(page).to have_content("#{user.zip}")
+      expect(page).to have_content("#{@user_1.name}")
+      expect(page).to have_content("#{@user_1.street_address}")
+      expect(page).to have_content("#{@user_1.city}")
+      expect(page).to have_content("#{@user_1.state}")
+      expect(page).to have_content("#{@user_1.zip}")
       expect(page).to have_content("In Progress")
     end
 
@@ -184,6 +160,47 @@ describe "As a visitor" do
         within "#pets-of-interest" do
           expect(page).to have_link("#{@pet_3.name}")
         end
+      end
+    end
+
+    describe "When I have added one or more pets to applicaton," do
+      it "I see a section to submit my application including input for why I
+          make a good owner " do
+        visit "/applications/#{@application_1.id}"
+
+        expect(page).to_not have_content("Why you would make a good owner:")
+
+        fill_in :search_by_name, with: "#{@pet_3.name}"
+        click_button "Search"
+        click_button "Adopt this Pet"
+
+        expect(page).to have_content("Why you would make a good owner:")
+        expect(page).to have_button("Submit Application")
+      end
+
+      it "When I fill in that input and click submit, I am taken back to application
+          show page and see and indicator that the app is pending, all the pets I
+          want to adopt, and I do not see a section to add more pets" do
+        visit "/applications/#{@application_1.id}"
+
+        fill_in :search_by_name, with: "#{@pet_1.name}"
+        click_button "Search"
+        click_button "Adopt this Pet"
+
+        fill_in :search_by_name, with: "#{@pet_2.name}"
+        click_button "Search"
+        click_button "Adopt this Pet"
+
+        fill_in :description, with: "I have taken care of pets for years and love
+                                    the mix of male and female cats and dogs!"
+        click_button "Submit Application"
+
+        expect(page).to have_content("Application for Adoption")
+        expect(page).to have_content("Pending")
+
+        expect(page).to_not have_content("In Progress")
+        expect(page).to_not have_content("Add a Pet to this Application")
+        expect(page).to_not have_button("Search")
       end
     end
   end
