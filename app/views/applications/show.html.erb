@@ -6,14 +6,16 @@
   <%= @application.user.city %>, <%= @application.user.state %>
   <%= @application.user.zip %></p>
 
-<p><%= @application.description %></p>
-<p><%= @application.application_status %></p>
+<p><i><%= @application.description %></i></p>
+<p><b><%= @application.application_status %></b></p>
 
-<% if @application.pets.count != 0 %>
-  <% @application.pets.each do |pet| %>
-    <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+<div id="pets-of-interest">
+  <% if @application.pets.count != 0 %>
+    <% @application.pets.uniq.each do |pet| %>
+      <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 <%= form_tag "/applications/#{@application.id}", method: 'get' do %>
   Add a Pet to this Application <br>
@@ -25,7 +27,12 @@
   <% if @pet_results != [] %>
     <% @pet_results.each do |pet| %>
       <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
-      # ~~ *~ * ~~*  Was going to add button here, see Slack notes ~~ * ~* *~
+      <form action=<%="/applications/#{@application.id}"%> method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="PATCH" />
+        <input type='hidden' name='pet_id' value="<%= pet.id%>"/>
+        <input type='submit' value='Adopt this Pet' name='Adopt this Pet'/>
+      </form>
     <% end %>
   <% end %>
 </section>
