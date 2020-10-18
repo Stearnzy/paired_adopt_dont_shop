@@ -137,16 +137,15 @@ describe "As a visitor" do
         fill_in "user_name", with: "#{@user_1.name}"
         click_on "Submit"
 
-        visit "/applications/#{@application_1.id}"
-
+        expect(page).to have_content("Application for Adoption")
         expect(page).to have_content("Add a Pet to this Application")
-
         expect(page).to_not have_content("Lizzie")
 
         fill_in :search_by_name, with: "Lizzie"
         click_button("Search")
 
-        expect(current_path).to eq("/applications/#{@application_1.id}")
+        expect(page).to have_content("Application for Adoption")
+        expect(page).to have_content("Add a Pet to this Application")
         expect(page).to have_content("Lizzie")
       end
     end
