@@ -6,7 +6,7 @@ class ApplicationsController < ApplicationController
     @user = User.find_by(name: params[:user_name])
 
     if @user.nil?
-      flash[:notice] = "User cannot be found - please try again."
+      flash.now[:notice] = "User cannot be found - please try again."
       render :new
     else
       application_creation
@@ -38,7 +38,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
 
     if params[:description] == ""
-      flash[:notice] = "Submission failed - must enter why you would make a good owner."
+      flash.now[:notice] = "Submission failed - must enter why you would make a good owner."
       render :show
     else
       @application.update!({

@@ -21,10 +21,10 @@ class ReviewsController < ApplicationController
 
   def creation_validation
     if @user == []
-      flash[:notice] = "User name does not exist. Please enter a valid user's name."
+      flash.now[:notice] = "User name does not exist. Please enter a valid user's name."
       render :new
     elsif @user != [] && @review.title == "" || @review.rating == nil || @review.content == ""
-      flash[:notice] = "Review not submitted - title, rating and content required."
+      flash.now[:notice] = "Review not submitted - title, rating and content required."
       render :new
     else
       @review.user_id = @user[0].id
