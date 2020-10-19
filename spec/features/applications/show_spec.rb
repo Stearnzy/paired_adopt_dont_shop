@@ -141,10 +141,21 @@ describe "As a visitor" do
         end
       end
 
-      it "Even return results where the name partially matches my search" do
+      it "Even returns results where the name partially matches my search" do
         visit "/applications/#{@application_1.id}"
 
         fill_in :search_by_name, with: "Gui"
+        click_button "Search"
+
+        within "#search-results" do
+          expect(page).to have_link("#{@pet_2.name}")
+        end
+      end
+
+      it "Even returns results for names without being sensitive to upcase or downcase" do
+        visit "/applications/#{@application_1.id}"
+
+        fill_in :search_by_name, with: "GuInEsS"
         click_button "Search"
 
         within "#search-results" do
