@@ -26,7 +26,7 @@ describe "As a visitor" do
       visit "/shelters/#{@shelter.id}/review/new"
 
       fill_in "title", with: "Great place!"
-      fill_in "rating", with: 4
+      select(4, from: :rating).select_option
       fill_in "content", with: "Can't wait to come back! Louis was awesome!"
       fill_in "user_name", with: "#{@user.name}"
 
@@ -46,8 +46,8 @@ describe "As a visitor" do
         visit "/shelters/#{@shelter.id}/review/new"
 
         fill_in "title", with: "Love this place"
-        fill_in "rating", with: 5
         fill_in "user_name", with: "#{@user.name}"
+        fill_in "content", with: "So clean and nice, can't wait to return"
 
         click_button "Submit"
 
@@ -62,7 +62,7 @@ describe "As a visitor" do
 
       fill_in "user_name", with: "Steven"
       fill_in "title", with: "Incredible"
-      fill_in "rating", with: 4
+      select(4, from: :rating).select_option
       fill_in "content", with: "Love all the rescued animals!"
 
       click_button "Submit"

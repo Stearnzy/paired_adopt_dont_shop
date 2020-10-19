@@ -1,0 +1,55 @@
+<a>Application for Adoption</a>
+
+<section id="application-info">
+  <h2><%= @application.user.name %></h2>
+
+  <p><%= @application.user.street_address %><br>
+    <%= @application.user.city %>, <%= @application.user.state %>
+    <%= @application.user.zip %></p>
+
+  <p><i><%= @application.description %></i></p>
+  <p><b><%= @application.application_status %></b></p>
+</section>
+
+<div id="pets-of-interest">
+  <% if @application.pets.count != 0 %>
+    <% @application.pets.uniq.each do |pet| %>
+      <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+    <% end %>
+  <% end %>
+</div>
+
+<% if @application.application_status == "In Progress" %>
+  <section id="search-for-pets">
+    <%= form_tag "/applications/#{@application.id}", method: 'get' do %>
+      Add a Pet to this Application <br>
+      <%= text_field_tag :search_by_name, params[:search_by_name], placeholder: "Search Pets by Name" %>
+      <%= submit_tag 'Search' %>
+    <% end %><br>
+  </section>
+<% end %>
+
+<section id="search-results">
+  <% if @pet_results != nil %>
+    <% @pet_results.each do |pet| %>
+      <h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h3><br>
+      <%= image_tag "#{pet.image}", style: 'width:30%;' %>
+      <form action=<%="/applications/#{@application.id}"%> method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="PATCH" />
+        <input type='hidden' name='pet_id' value="<%= pet.id%>"/>
+        <input type='submit' value='Adopt this Pet' name='Adopt this Pet'/>
+      </form><br>
+    <% end %>
+  <% end %>
+</section><br>
+
+<% if @application.pets.count != 0 && @application.application_status == "In Progress" %>
+  <section>
+    <%= form_tag "/applications/#{@application.id}", method: 'put' do %>
+      <%= label_tag "Why you would make a good owner:" %><br>
+      <%= text_area_tag "description" %>
+      <%= submit_tag "Submit Application" %>
+    <% end %>
+  </section>
+<% end %>
