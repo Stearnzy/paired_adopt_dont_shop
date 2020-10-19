@@ -6,7 +6,7 @@
   <%= text_field_tag :title %><br><br>
 
   <%= label_tag "Rating" %><br>
-  <%= number_field_tag :rating %><br><br>
+  <%= select_tag :rating, options_for_select(1..5), prompt: "Select" %><br><br>
 
   <%= label_tag "Content" %><br>
   <%= text_field_tag :content %><br><br>

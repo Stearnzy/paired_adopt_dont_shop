@@ -43,7 +43,7 @@ describe "As a user" do
       expect(find_field('user_name').value).to eq("#{review.user_name}")
       expect(find_field('picture').value).to eq("#{review.picture}")
 
-      fill_in "rating", with: 5
+      select(5, from: :rating).select_option
       expect(find_field("rating").value).to eq("5")
 
       click_button('Submit')
