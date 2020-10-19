@@ -32,13 +32,14 @@
 <section id="search-results">
   <% if @pet_results != [] && @pet_results != nil %>
     <% @pet_results.each do |pet| %>
-      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+      <h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h3><br>
+      <%= image_tag "#{pet.image}", style: 'width:30%;' %>
       <form action=<%="/applications/#{@application.id}"%> method="post">
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <input type="hidden" name="_method" value="PATCH" />
         <input type='hidden' name='pet_id' value="<%= pet.id%>"/>
         <input type='submit' value='Adopt this Pet' name='Adopt this Pet'/>
-      </form>
+      </form><br>
     <% end %>
   <% end %>
 </section><br>
