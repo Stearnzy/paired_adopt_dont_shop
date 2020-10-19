@@ -28,7 +28,7 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:application_id])
     @pets = Pet.all
-    @pet_results =[]
+    @pet_results = nil
     if params[:search_by_name] != "" && params[:search_by_name] != nil
       @pet_results = @pets.where("lower(name) like ?", "%#{params[:search_by_name]}%".downcase)
     end
@@ -36,7 +36,7 @@ class ApplicationsController < ApplicationController
 
   def update
     @application = Application.find(params[:id])
-    
+
     if params[:description] == ""
       flash[:notice] = "Submission failed - must enter why you would make a good owner."
       render :show

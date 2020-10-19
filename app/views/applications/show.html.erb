@@ -30,7 +30,7 @@
 <% end %>
 
 <section id="search-results">
-  <% if @pet_results != [] && @pet_results != nil %>
+  <% if @pet_results != nil %>
     <% @pet_results.each do |pet| %>
       <h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></h3><br>
       <%= image_tag "#{pet.image}", style: 'width:30%;' %>
