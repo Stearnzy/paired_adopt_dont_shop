@@ -137,7 +137,7 @@ describe "As a visitor" do
       visit "/admin/applications/#{@application_1.id}"
 
       click_button("Reject Pet", match: :first)
-
+save_and_open_page
       expect(page).to have_content("Pet Rejected")
       expect(page).to have_button("Reject Pet", count: 2)
     end

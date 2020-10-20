@@ -6,15 +6,15 @@ class AdminApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:id])
-    pet_app = PetApplication.find_by(pet_id: [params[:key]])
+    @pet_app = PetApplication.find_by(pet_id: [params[:key]])
 
-    if params[value: :approve]
-      pet_app.update({
+    if params[:value] == "approve"
+      @pet_app.update({
         approval: "Approved"
         })
       redirect_to "/admin/applications/#{application.id}"
-    elsif params[value: :reject]
-      pet_app.update({
+    elsif params[:value] == "reject"
+      @pet_app.update({
         approval: "Rejected"
         })
       redirect_to "/admin/applications/#{application.id}"
