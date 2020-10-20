@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe "As a visitor" do
-  describe "When I visit an admin application show page ('/admin/applications/:id')" do 
+  describe "When I visit an admin application show page ('/admin/applications/:id')" do
     it "For every pet that the application is for, I see a button to approve the application for that specific pet
         When I click that button
         Then Im taken back to the admin application show page
         And next to the pet that I approved, I do not see a button to approve this pet
         And instead I see an indicator next to the pet that they have been approved" do
-      
+
       @shelter_1 = Shelter.create({
         name: "Crazy Cat Lady's",
         address: "123 Litterbox Way",
@@ -43,9 +43,9 @@ describe "As a visitor" do
       @petapp_1 = PetApplication.create!(
         application_id: @application_1.id,
         pet_id: @pet_1.id,
-        approval: false
+        approval: "Pending"
       )
-
+require "pry"; binding.pry
       visit "/admin/applications/#{@application_1.id}"
 
       expect(page).to have_button("Approve Application")
