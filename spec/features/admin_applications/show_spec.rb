@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe "As a visitor" do
   describe "When I visit an admin application show page ('/admin/applications/:id')" do 
-    it 'For every pet that the application is for, I see a button to approve the application for that specific pet
+    it "For every pet that the application is for, I see a button to approve the application for that specific pet
         When I click that button
         Then Im taken back to the admin application show page
         And next to the pet that I approved, I do not see a button to approve this pet
-        And instead I see an indicator next to the pet that they have been approved' do
+        And instead I see an indicator next to the pet that they have been approved" do
       
       @shelter_1 = Shelter.create({
         name: "Crazy Cat Lady's",
