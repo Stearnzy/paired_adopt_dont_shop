@@ -4,7 +4,4 @@ class Pet < ApplicationRecord
   has_many :applications, through: :pet_applications
   validates_presence_of :image, :name, :description, :age, :sex, :adoptable
 
-  def method_name
-
-  end
 end

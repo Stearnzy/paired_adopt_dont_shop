@@ -1,24 +1,15 @@
 class AdminApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
-    # @pet_application = PetApplication.find_by(params[:id])
-    @call_pets = call_pets_by_app
-    # require "pry"; binding.pry
-    
+    @pet_app = PetApplication.where(application_id: @application.id)
   end
 
   def update
-
+    application = Application.find(params[:id])
+    pet_app = PetApplication.find_by(pet_id: [params[:key]])
+    pet_app.update({
+      approval: "Approved"
+      })
+    redirect_to "/admin/applications/#{application.id}"
   end
-
-private
-  def call_pets_by_app
-    pets = @application.pets.map {|pet| pet.id}
-    pet_ids = pets.each {|pet| PetApplication.find_by(params[:pet_id])}
-    pet_application_objects = pet_ids.map do |pet|
-      PetApplication.find_by(params[:pet_id])
-    end
-    pet_application_objects
-  end
-
 end

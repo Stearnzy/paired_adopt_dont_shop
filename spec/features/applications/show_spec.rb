@@ -48,8 +48,7 @@ describe "As a visitor" do
 
       @application_1 = Application.create(
         user_id: @user_1.id,
-        application_status: 'In Progress',
-        pets: []
+        application_status: 'In Progress'
       )
     end
       it "Then I can see the following:

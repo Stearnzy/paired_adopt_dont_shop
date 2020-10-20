@@ -37,7 +37,6 @@ class ApplicationsController < ApplicationController
 
   def update
     @application = Application.find(params[:id])
-require "pry"; binding.pry
     if params[:description] == ""
       flash.now[:notice] = "Submission failed - must enter why you would make a good owner."
       render :show
