@@ -1,11 +1,9 @@
 <h1>Application for <%= @application.user.name %></h1>
 
 <% if @pet_app.all?{|app| app.approval == "Approved"} %>
-  <h2>Application Approved</h2>
-<% end %>
-
-<% if @pet_app.any?{|app| app.approval == "Rejected"} %>
-  <h2>Application Rejected</h2>
+    <h2>Application Approved</h2>
+<% elsif @pet_app.any?{|app| app.approval == "Rejected"} %>
+    <h2>Application Rejected</h2>
 <% end %>
 
 <% @pet_app.each do |app| %>
