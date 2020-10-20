@@ -3,7 +3,11 @@
 <img src=<%= @pet.image %> alt="<% @pet.name %>" width="30%">
 
 <h2><%= @pet.name %></h2>
-<h4>Adoptable </h4>
+  <% if @pet.adoptable? %>
+    <h4>Adoptable</h4>
+  <% else %>
+    <h4>Not Adoptable</h4>
+  <% end %>
 <p>Age: <%= @pet.age %></p>
 <p>Sex: <%= @pet.sex %></p>
 <hr>
