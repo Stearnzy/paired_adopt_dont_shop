@@ -1,5 +1,17 @@
 <h1>Application for <%= @application.user.name %></h1>
-<% @application.pets.each do |pet| %>
-<%= pet.name %>
 
-<% end %>
+<% @pet_app.each do |app| %>
+
+<section>
+  <%= app.retrieve_name %>
+    <% if app.approval == "Pending"  %>
+      <%= button_to 'Approve Pet', "/admin/applications/#{@application.id}", method: 'patch', params: { key: app.pet_id, value: :approve } %>
+      <%= button_to 'Reject Pet', "/admin/applications/#{@application.id}", method: 'patch', params: { key: app.pet_id, value: :reject } %>
+    <% elsif app.approval == "Approved" %>
+      <p>Pet Approved</p>
+    <% elsif app.approval == "Rejected" %>
+      <p>Pet Rejected</p>
+    <% end %>
+  <% end %>
+</section>
+
