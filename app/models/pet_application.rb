@@ -6,8 +6,4 @@ class PetApplication < ApplicationRecord
   def retrieve_name
     Pet.find(self.pet_id).name
   end
-
-  def self.pet_approved?
-    approval == "Approved"
-  end
 end
