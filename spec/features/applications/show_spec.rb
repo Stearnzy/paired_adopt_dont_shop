@@ -62,17 +62,20 @@ describe "As a visitor" do
       petapp_1 = PetApplication.create!(
         application_id: @application_1.id,
         pet_id: @pet_1.id,
-        approval: true
+        approval: true,
+        approval: "Pending"
       )
 
       petapp_2 = PetApplication.create!(
         application_id: @application_1.id,
-        pet_id: @pet_2.id
+        pet_id: @pet_2.id,
+        approval: "Pending"
       )
 
       petapp_3 = PetApplication.create!(
         application_id: @application_1.id,
-        pet_id: @pet_3.id
+        pet_id: @pet_3.id,
+        approval: "Pending"
       )
 
       visit "/applications/#{@application_1.id}"
