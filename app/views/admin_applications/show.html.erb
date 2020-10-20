@@ -5,9 +5,12 @@
 <section>
   <%= app.retrieve_name %>
     <% if app.approval == "Pending"  %>
-      <%= button_to 'Approve Pet', "/admin/applications/#{@application.id}", method: 'patch', params: { key: app.pet_id } %>
+      <%= button_to 'Approve Pet', "/admin/applications/#{@application.id}", method: 'patch', params: { key: app.pet_id, value: :approve } %>
+      <%= button_to 'Reject Pet', "/admin/applications/#{@application.id}", method: 'patch', params: { key: app.pet_id, value: :reject } %>
     <% elsif app.approval == "Approved" %>
       <p>Pet Approved</p>
+    <% elsif app.approval == "Rejected" %>
+      <p>Pet Rejected</p>
     <% end %>
   <% end %>
 </section>
