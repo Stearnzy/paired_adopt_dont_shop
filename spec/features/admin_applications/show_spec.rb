@@ -63,7 +63,7 @@ describe "As a visitor" do
         sex: "male",
         shelter_id: "#{@shelter_1.id}"
       })
-      
+
       @pet_3 = Pet.create({
         image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
         name: "Nena",
@@ -141,6 +141,28 @@ describe "As a visitor" do
 
       expect(page).to have_content("Pet Rejected")
       expect(page).to have_button("Reject Pet", count: 2)
+    end
+
+    it "If I approve all pets for an app then I am taken back to the admin application
+        show page and see the app's status changed to Approved" do
+      visit "/admin/applications/#{@application_1.id}"
+
+      click_button("Approve Pet", match: :first)
+      click_button("Approve Pet", match: :first)
+      click_button("Approve Pet", match: :first)
+
+      expect(page).to have_content("Application Approved")
+    end
+
+    it "If I reject one or more pets for an app then I am taken back to the admin application
+        show page and see the app's status changed to Rejected" do
+      visit "/admin/applications/#{@application_1.id}"
+
+      click_button("Reject Pet", match: :first)
+      click_button("Approve Pet", match: :first)
+      click_button("Approve Pet", match: :first)
+
+      expect(page).to have_content("Application Rejected")
     end
   end
 end
