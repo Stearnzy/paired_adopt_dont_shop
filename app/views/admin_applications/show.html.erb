@@ -1,5 +1,8 @@
 <h1>Application for <%= @application.user.name %></h1>
-<% @application.pets.each do |pet| %>
-<%= pet.name %>
+<% @call_pets.each do |pet| %>
+  <% if pet.approval == "Pending"  %>
+    
+  <% end %>
+
 
 <% end %>

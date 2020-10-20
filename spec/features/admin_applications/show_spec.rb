@@ -40,12 +40,42 @@ describe "As a visitor" do
         adoptable: true
       })
 
+      @pet_2 = Pet.create({
+        image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
+        name: "Guiness",
+        description: "Floppy-eared dude ready to play ball!",
+        age: 3,
+        sex: "male",
+        shelter_id: "#{@shelter_1.id}"
+      })
+      @pet_3 = Pet.create({
+        image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
+        name: "Nena",
+        description: "In your face and always hungry.",
+        age: 9,
+        sex: "female",
+        shelter_id: "#{@shelter_1.id}"
+      })
+
+
       @petapp_1 = PetApplication.create!(
         application_id: @application_1.id,
         pet_id: @pet_1.id,
         approval: "Pending"
       )
-require "pry"; binding.pry
+
+      @petapp_2 = PetApplication.create!(
+        application_id: @application_1.id,
+        pet_id: @pet_2.id,
+        approval: "Pending"
+      )
+
+      @petapp_3 = PetApplication.create!(
+        application_id: @application_1.id,
+        pet_id: @pet_3.id,
+        approval: "Pending"
+      )
+
       visit "/admin/applications/#{@application_1.id}"
 
       expect(page).to have_button("Approve Application")
@@ -55,7 +85,7 @@ require "pry"; binding.pry
       expect(path).to eq("/admin/applications/#{@application_1.id}")
 
       expect(page).to have_content("Application Approved")
-      expect(page).to_not have_content("Approve Application")
+      expect(page).to_not have_button("Approve Application")
 
     end
   end
