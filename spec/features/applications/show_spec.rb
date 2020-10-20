@@ -61,7 +61,8 @@ describe "As a visitor" do
 
       petapp_1 = PetApplication.create!(
         application_id: @application_1.id,
-        pet_id: @pet_1.id
+        pet_id: @pet_1.id,
+        approval: true
       )
 
       petapp_2 = PetApplication.create!(

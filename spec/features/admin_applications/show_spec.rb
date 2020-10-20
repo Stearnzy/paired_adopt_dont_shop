@@ -36,12 +36,14 @@ describe "As a visitor" do
         description: "Timid and affectionate once she knows you.",
         age: 6,
         sex: "female",
-        shelter_id: "#{@shelter_1.id}"
+        shelter_id: "#{@shelter_1.id}",
+        adoptable: true
       })
 
       @petapp_1 = PetApplication.create!(
         application_id: @application_1.id,
-        pet_id: @pet_1.id
+        pet_id: @pet_1.id,
+        approval: false
       )
 
       visit "/admin/applications/#{@application_1.id}"
