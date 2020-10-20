@@ -14,7 +14,8 @@ class PetsController < ApplicationController
       description: params[:description],
       age: params[:age],
       sex: params[:sex],
-      shelter_id: params[:shelter_id]
+      shelter_id: params[:shelter_id],
+      adopt_status: "Adoptable"
       })
 
     pet.save
