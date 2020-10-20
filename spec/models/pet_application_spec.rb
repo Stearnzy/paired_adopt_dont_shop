@@ -1,14 +1,10 @@
-require "rails_helper"
+# require "rails_helper"
 
-RSpec.describe PetApplication, type: :model do
-  describe "relationships" do
-    it { should belong_to :pet}
-    it { should belong_to :application}
-    it { should validate_presence_of :approval }
-  end
-
-  # describe "a specification" do
-    
-  # end
+# RSpec.describe PetApplication, type: :model do
+#   describe "relationships" do
+#     it { should belong_to :pet}
+#     it { should belong_to :application}
+#     it { should validate_presence_of :approval }
+#   end
   
-end
+# end
