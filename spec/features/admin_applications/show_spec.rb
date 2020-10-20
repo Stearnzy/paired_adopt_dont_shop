@@ -63,6 +63,7 @@ describe "As a visitor" do
         sex: "male",
         shelter_id: "#{@shelter_1.id}"
       })
+      
       @pet_3 = Pet.create({
         image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
         name: "Nena",
@@ -137,7 +138,7 @@ describe "As a visitor" do
       visit "/admin/applications/#{@application_1.id}"
 
       click_button("Reject Pet", match: :first)
-save_and_open_page
+
       expect(page).to have_content("Pet Rejected")
       expect(page).to have_button("Reject Pet", count: 2)
     end
