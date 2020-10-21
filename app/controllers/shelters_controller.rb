@@ -14,7 +14,6 @@ class SheltersController < ApplicationController
       state: params[:shelter][:state],
       zip: params[:shelter][:zip]
       })
-
     shelter.save
 
     redirect_to '/shelters'
@@ -38,7 +37,6 @@ class SheltersController < ApplicationController
       state: params[:shelter][:state],
       zip: params[:shelter][:zip]
       })
-
       shelter.save
 
       redirect_to "/shelters/#{shelter.id}"
@@ -47,6 +45,11 @@ class SheltersController < ApplicationController
   def destroy
     @shelter = Shelter.find(params[:id])
     @reviews = @shelter.reviews
+    destruction_validation
+  end
+
+private
+  def destruction_validation
     if @shelter.any_pending_applications?
       flash.now[:notice] = "Cannot delete shelter with pending applications!"
       render :show
