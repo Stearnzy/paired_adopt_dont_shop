@@ -13,6 +13,8 @@ class PetApplication < ApplicationRecord
 
   def self.pet_approved?
     approval == "Approved"
+  end 
+  
   def retrieve_pet_name
     retrieve_pet.name
   end

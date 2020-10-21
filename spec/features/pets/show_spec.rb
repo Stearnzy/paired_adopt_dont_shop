@@ -88,10 +88,9 @@ describe "As a visitor" do
 
       expect(page).to have_link("View Applications")
 
-      click_on("View Application")
+      click_on("View Applications")
 
-      expect(page).to have_content("#{@user_1.name} Application")  
-
-      end
+      expect(page).to have_content("#{@user_1.name}'s Application")  
+    end
   end
 end
