@@ -21,6 +21,15 @@ describe "As a visitor" do
         shelter_id: "#{@shelter.id}"
         })
 
+      @pet_2 = Pet.create({
+        image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
+        name: "Nena",
+        description: "She is always ready to share some of your food!",
+        age: 10,
+        sex: "female",
+        shelter_id: "#{@shelter.id}"
+        })
+
       @user_1 = User.create({
         name: 'Bobby',
         street_address: '123 fake st.',
@@ -39,7 +48,6 @@ describe "As a visitor" do
         pet_id: "#{@pet_1.id}",
         approval: "Pending"
       )
-
     end
 
     it "I see the pet with that id including image, name, description,
@@ -83,15 +91,49 @@ describe "As a visitor" do
     it "I see a link to view all applications for this pet
       When I click that link
       I can see a list of all the names of applicants for this pet
-      Each applicants name is a link to the application's show page" do 
+      Each applicants name is a link to the application's show page" do
       visit "/pets/#{@pet_1.id}"
 
       expect(page).to have_link("View Applications")
 
-      click_on("View Application")
+      click_on("View Applications")
 
-      expect(page).to have_content("#{@user_1.name} Application")  
+      expect(page).to have_content("#{@user_1.name}'s Application")
+    end
 
-      end
+    it 'When I visit a pet applications index page for a pet that has no applications on them
+        I see a message saying that there are no applications for this pet yet' do
+
+        visit "/pets/#{@pet_2.id}"
+
+        click_on("View Applications")
+
+        expect(page).to have_content("This pet has no open applications yet!")
+    end
+
+    it 'When a pet has approved applications, they cannot be deleted.' do
+      application_1 = Application.create!({
+        user_id: @user_1.id,
+        description: nil,
+        application_status: "Approved"
+        })
+
+      petapp_2 = PetApplication.create!(
+        application_id: "#{application_1.id}",
+        pet_id: "#{@pet_1.id}",
+        approval: "Approved"
+      )
+
+      petapp_3 = PetApplication.create!(
+        application_id: "#{application_1.id}",
+        pet_id: "#{@pet_2.id}",
+        approval: "Approved"
+      )
+
+      visit "/pets/#{@pet_2.id}"
+
+      click_link "Delete Pet"
+      expect(page).to have_content("Cannot delete a pet with approved applications!")
+    end
   end
 end

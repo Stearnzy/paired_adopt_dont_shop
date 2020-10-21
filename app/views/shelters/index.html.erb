@@ -2,10 +2,14 @@
 
 <h1>Our Family of Shelters</h1>
 
+
 <% @shelters.each do |shelter| %>
-  <h3><a href="/shelters/<%= shelter.id %>"><%= shelter.name %></a></h3>
-  <a href="/shelters/<%= shelter.id %>/edit">Edit Shelter</a><br>
-  <a href="/shelters/<%= shelter.id %>" data-method="DELETE">Delete</a>
+  <section id="shelter-<%= shelter.id %>"
+    <h3><a href="/shelters/<%= shelter.id %>"><%= shelter.name %></a></h3>
+    <a href="/shelters/<%= shelter.id %>/edit">Edit Shelter</a><br>
+
+    <a href="/shelters/<%= shelter.id %>" data-method="DELETE">Delete Shelter</a>
+  </section>
 <% end %><br><br>
 
 <a href="/shelters/new" class="button">New Shelter</a>

@@ -7,22 +7,36 @@
 
 <a href="/shelters/<%= @shelter.id %>/pets">See Our Pets</a><br><br>
 
+
+<h3>Shelter Statistics</h3>
+<p id="count">Number of Pets: <%= @shelter.pet_count %></p>
+
+<% if @reviews.count > 0 %>
+  <p id='avg-customer-reviews'>Average Customer Reviews: <%= @shelter.review_average %></p>
+<% end %>
+
+<p id='app-count'>Total Applications: <%= @shelter.application_count %></p>
+
+
 <a href="/shelters/<%= @shelter.id %>/review/new">Leave a Review</a><br>
 
 <h3>Reviews</h3>
 <div id="rev">
   <% @reviews.each do |review| %>
+    <h2 id="name-review"><%= review.user_name %>: <%= review.rating %></h2>
     <h4><%= review.title %></h4>
-    <h6 id="name-review"><%= review.user_name %>: <%= review.rating %></h6>
     <p><%= review.content %></p>
+
     <% if review.picture != "" %>
       <%= image_tag(review.picture, width:'30%') %>
     <% end %><br>
+
     <%= link_to "Edit Review", "/shelters/#{@shelter.id}/review/#{review.id}/edit" %><br>
     <%= link_to "Delete Review", "/shelters/#{@shelter.id}/review/#{review.id}", method: "delete" %>
   <% end %><br><br>
 </div>
 
+
+
 <%= link_to "Update Shelter","/shelters/#{@shelter.id}/edit" %><br>
 <%= link_to "Delete Shelter", "/shelters/#{@shelter.id}", method: "delete" %>
-
