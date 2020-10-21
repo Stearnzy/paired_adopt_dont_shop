@@ -303,5 +303,17 @@ describe "As a visitor" do
       click_link "Delete Shelter"
       expect(page).to have_content("Cannot delete shelter with pending applications!")
     end
+
+    it "If a shelter doesn't have any pets with an approved application I can delete
+        that shelter. When that shelter is deleted, all their pets are also deleted" do
+      visit "/shelters/#{@shelter_2.id}"
+
+      click_link "Delete Shelter"
+
+      expect(current_path).to eq("/shelters")
+      expect(page).to_not have_content("#{@shelter_2.name}")
+      click_link "To Pets Index"
+      expect(page).to_not have_content("#{@pet_1.name}")
+    end
   end
 end

@@ -48,7 +48,6 @@ describe "As a visitor" do
         pet_id: "#{@pet_1.id}",
         approval: "Pending"
       )
-
     end
 
     it "I see the pet with that id including image, name, description,
@@ -113,7 +112,6 @@ describe "As a visitor" do
     end
 
     it 'When a pet has approved applications, they cannot be deleted.' do
-
       application_1 = Application.create!({
         user_id: @user_1.id,
         description: nil,
@@ -136,7 +134,6 @@ describe "As a visitor" do
 
       click_link "Delete Pet"
       expect(page).to have_content("Cannot delete a pet with approved applications!")
-  
     end
   end
 end

@@ -73,15 +73,6 @@ describe "As a visitor" do
         shelter_id: "#{@shelter_1.id}"
       })
 
-      # @pet_4 = Pet.create({
-      #   image: "https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg",
-      #   name: "Gus",
-      #   description: "Always sittin' pretty.",
-      #   age: 4,
-      #   sex: "male",
-      #   shelter_id: "#{@shelter_2.id}"
-      #   })
-
       @petapp_1 = PetApplication.create!(
         application_id: "#{@application_2.id}",
         pet_id: "#{@pet_1.id}",
