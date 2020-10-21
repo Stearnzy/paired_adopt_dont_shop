@@ -43,6 +43,16 @@ describe Pet, type: :model do
       adoptable: true
     })
 
+    pet_2 = Pet.create({
+      image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
+      name: "Nena",
+      description: "Cute, loving, and always hungry.",
+      age: 10,
+      sex: "female",
+      shelter_id: "#{shelter_1.id}",
+      adoptable: true
+    })
+
     application_1 = Application.create(
       user_id: "#{user_1.id}",
       application_status: 'In Progress',
@@ -51,6 +61,17 @@ describe Pet, type: :model do
     petapp_1 = PetApplication.create!(
       application_id: "#{application_1.id}",
       pet_id: "#{pet_1.id}",
+      approval: "Pending"
+    )
+
+    application_2 = Application.create(
+      user_id: "#{user_1.id}",
+      application_status: 'Approved',
+    )
+
+    petapp_1 = PetApplication.create!(
+      application_id: "#{application_2.id}",
+      pet_id: "#{pet_2.id}",
       approval: "Pending"
     )
 
