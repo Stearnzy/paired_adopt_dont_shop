@@ -48,7 +48,7 @@ RSpec.describe PetApplication, type: :model do
     expect(petapp_1.retrieve_pet).to eq(pet_1)
   end
 
-  it "knows if a pet is adoptable" do
+  it "retrieve pet name from PetApplication" do
     shelter_1 = Shelter.create({
       name: "Crazy Cat Lady's",
       address: "123 Litterbox Way",
@@ -89,7 +89,7 @@ RSpec.describe PetApplication, type: :model do
     expect(petapp_1.retrieve_pet_name).to eq("Lizzie")
   end
 
-  it "retrieve pet name from PetApplication" do
+  it "knows if a pet is adoptable" do
     shelter_1 = Shelter.create({
       name: "Crazy Cat Lady's",
       address: "123 Litterbox Way",
@@ -127,7 +127,7 @@ RSpec.describe PetApplication, type: :model do
       approval: "Pending"
     )
 
-    expect(pet_1.adoptable).to eq(true)
+    expect(petapp_1.pet_adoptable?).to eq(true)
   end
 
 end
