@@ -264,9 +264,17 @@ describe "As a visitor" do
         pet_id: "#{@pet_3.id}",
         approval: "Pending"
       )
-require "pry"; binding.pry
+
+    visit "/shelters/#{@shelter.id}"
+
       within "#app-count" do
         expect(page).to have_content("Active Applications: 2")
+      end
+
+    visit "/shelters/#{@shelter_2.id}"
+
+      within "#app-count" do
+        expect(page).to have_content("Active Applications: 1")
       end
     end
   end
