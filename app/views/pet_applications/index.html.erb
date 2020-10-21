@@ -1,5 +1,9 @@
 <h1>Applications</h1>
 
-<% @pet.applications.each do |app| %>
-  <a href="/applications/<%= app.id %>"><%= app.retrieve_user.name %>'s Application</a>
+<% if @pet.applications == [] %>
+  <p>This pet has no open applications yet!</p>
+<% else %>
+  <% @pet.applications.each do |app| %>
+    <a href="/applications/<%= app.id %>"><%= app.retrieve_user.name %>'s Application</a>
+  <% end %>
 <% end %>

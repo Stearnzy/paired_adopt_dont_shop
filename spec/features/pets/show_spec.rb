@@ -21,6 +21,15 @@ describe "As a visitor" do
         shelter_id: "#{@shelter.id}"
         })
 
+      @pet_2 = Pet.create({
+        image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
+        name: "Nena",
+        description: "She is always ready to share some of your food!",
+        age: 10,
+        sex: "female",
+        shelter_id: "#{@shelter.id}"
+        })
+
       @user_1 = User.create({
         name: 'Bobby',
         street_address: '123 fake st.',
@@ -91,6 +100,16 @@ describe "As a visitor" do
       click_on("View Applications")
 
       expect(page).to have_content("#{@user_1.name}'s Application")  
+    end
+
+    it 'When I visit a pet applications index page for a pet that has no applications on them
+        I see a message saying that there are no applications for this pet yet' do
+
+        visit "/pets/#{@pet_2.id}"
+
+        click_on("View Applications")
+
+        expect(page).to have_content("This pet has no open applications yet!")
     end
   end
 end
