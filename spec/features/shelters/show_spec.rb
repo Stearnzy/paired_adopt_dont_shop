@@ -18,6 +18,30 @@ describe "As a visitor" do
         state: 'CO',
         zip: '80205'
       })
+
+      @pet_1 = Pet.create({
+        image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
+        name: "Guiness",
+        description: "Floppy-eared dude ready to play ball!",
+        age: 3,
+        sex: "male",
+        shelter_id: "#{@shelter.id}"
+      })
+
+      @pet_2 = Pet.create({
+        image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
+        name: "Nena",
+        description: "She is always ready to share some of your food!",
+        age: 10,
+        sex: "female",
+        shelter_id: "#{@shelter.id}"
+      })
+
+      # @petapp_1 = PetApplication.create!(
+      #   application_id: "#{@application_1.id}",
+      #   pet_id: "#{@pet_1.id}",
+      #   approval: "Pending"
+      # )
     end
 
     it "I see the shelter with that id including the shelter's
@@ -156,11 +180,41 @@ describe "As a visitor" do
         - count of pets that are at that shelter
         - average shelter review rating
         - number of applications on file for that shelter' do
+        
+    review_1 = Review.create!({
+      user_name: "Bobby",
+      title: "Love this place",
+      rating: 5,
+      content: "Great staff all around",
+      shelter_id: "#{@shelter.id}",
+      user_id: "#{@user.id}"
+      })
+
+    review_2 = Review.create!({
+      user_name: "Bobby",
+      title: "Dogs are OK",
+      rating: 2,
+      content: "One peed on my leg",
+      shelter_id: "#{@shelter.id}",
+      user_id: "#{@user.id}"
+      })
+
+    review_3 = Review.create!({
+      user_name: "Bobby",
+      title: "Bird crap everywhere",
+      rating: 1,
+      content: "Worst ever.",
+      shelter_id: "#{@shelter.id}",
+      user_id: "#{@user.id}"
+      })
+    
     visit "/shelters/#{@shelter.id}"
 
-    expect(page).to have_content("#{@shelter.pet_count}")  
-    expect(page).to have_content("#{@shelter.review_average}")  
-    expect(page).to have_content("#{@shelter.application_count}")  
+    within "#count" do
+      expect(page).to have_content("Number of Pets: #{@shelter.pet_count}")  
+    # expect(page).to have_content("#{@shelter.review_average}")  
+    # expect(page).to have_content("#{@shelter.application_count}")  
+      end 
     end
   end
 end
