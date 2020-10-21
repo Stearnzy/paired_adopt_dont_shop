@@ -51,7 +51,7 @@ describe "As a visitor" do
 
     end
 
-    xit "I see the pet with that id including image, name, description,
+    it "I see the pet with that id including image, name, description,
         approximate age, sex, and adoptable/pending adoption status" do
 
       visit "/pets/#{@pet_1.id}"
@@ -74,7 +74,7 @@ describe "As a visitor" do
       expect(page).to have_link("Delete")
     end
 
-    xit "When I click delete, pet is deleted and redirected to pet index" do
+    it "When I click delete, pet is deleted and redirected to pet index" do
       visit "/pets/#{@pet_1.id}"
 
       click_on "Delete Pet"

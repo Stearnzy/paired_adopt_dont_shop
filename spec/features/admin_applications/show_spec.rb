@@ -165,7 +165,7 @@ describe "As a visitor" do
       expect(page).to have_content("Application Rejected")
     end
 
-    xit "When a pet has an Approved app on them and I visit the admin show page of
+    it "When a pet has an Approved app on them and I visit the admin show page of
         another application that is pending on the same pet, I do not see a button
         next to the pet.  Instead I see a message that this pet has been approved" do
       visit "/admin/applications/#{@application_2.id}"

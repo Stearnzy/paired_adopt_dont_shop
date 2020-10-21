@@ -151,5 +151,16 @@ describe "As a visitor" do
         expect(page).to_not have_content("#{review.user_name}")
         expect(page).to_not have_content("#{review.picture}")
     end
+
+    it 'I see statistics for that shelter, including:
+        - count of pets that are at that shelter
+        - average shelter review rating
+        - number of applications on file for that shelter' do
+    visit "/shelters/#{@shelter.id}"
+
+    expect(page).to have_content("#{@shelter.pet_count}")  
+    expect(page).to have_content("#{@shelter.review_average}")  
+    expect(page).to have_content("#{@shelter.application_count}")  
+    end
   end
 end
