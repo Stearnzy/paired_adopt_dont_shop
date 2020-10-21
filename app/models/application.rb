@@ -11,4 +11,15 @@ class Application < ApplicationRecord
   def find_pet_apps
     PetApplication.where(pet_id: self.pet_ids)
   end
+
+  def all_approved?
+    require "pry"; binding.pry
+  end
+
+  # def adoptify
+  #   self.pets.each do |pet|
+  #     pet.toggle_adopt
+  #   end
+  #   require "pry"; binding.pry
+  # end
 end
