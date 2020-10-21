@@ -11,4 +11,8 @@ class Application < ApplicationRecord
   def find_pet_apps
     PetApplication.where(pet_id: self.pet_ids)
   end
+
+   def retrieve_user
+    User.find(self.user_id)
+  end
 end

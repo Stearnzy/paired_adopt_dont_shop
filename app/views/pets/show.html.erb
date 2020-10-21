@@ -3,16 +3,22 @@
 <img src=<%= @pet.image %> alt="<% @pet.name %>" width="30%">
 
 <h2><%= @pet.name %></h2>
-  <% if @pet.adoptable? %>
-    <h4>Adoptable</h4>
-  <% else %>
-    <h4>Not Adoptable</h4>
-  <% end %>
+<% if @pet.adoptable? %>
+<h4>Adoptable</h4>
+<% else %>
+<h4>Not Adoptable</h4>
+<% end %>
 <p>Age: <%= @pet.age %></p>
 <p>Sex: <%= @pet.sex %></p>
 <hr>
 <p><%= @pet.description %></p>
 
-<a href="/pets/<%= @pet.id %>/edit">Update Pet</a><br>
+<p><a href="">View Applications</a></p>
+<% @pet.applications.each do |app| %>
+<a href="/pets/<%= @pet.id %>"><%= app.retrieve_user.name %>'s Application</a>
+<% end %>
+
+
+<a href=" /pets/<%= @pet.id %>/edit">Update Pet</a><br>
 
 <a href="/pets/<%= @pet.id %>" data-method="DELETE">Delete Pet</a>
