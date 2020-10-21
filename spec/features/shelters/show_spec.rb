@@ -315,5 +315,44 @@ describe "As a visitor" do
       click_link "To Pets Index"
       expect(page).to_not have_content("#{@pet_1.name}")
     end
+
+    it "When a shelter is deleted, so are its reviews" do
+      review_1 = Review.create!({
+        user_name: "Bobby",
+        title: "Great customer service",
+        rating: 5,
+        picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
+        content: "Great staff all around",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+        })
+
+      review_2 = Review.create!({
+        user_name: "Bobby",
+        title: "Clean up a little",
+        rating: 4,
+        picture: 'https://www.treehugger.com/thmb/69yZbhJR6bzhORevUYoLRX_pHSQ=/640x480/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2016__04__IMG_4146-6db7307bdc4447d0bd152df2c5d4c68b.JPG',
+        content: "Some litter spots in areas.  Not bad though!",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+        })
+
+      review_3 = Review.create!({
+        user_name: "Bobby",
+        title: "Beautiful cats",
+        rating: 4,
+        picture: 'https://cdn.omlet.co.uk/images/originals/Cat-Cat_Guide-A_litter_of_six_black_and_white_kittens.jpg',
+        content: "Gorgeous kittens!",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+        })
+
+      visit "/shelters/#{@shelter.id}"
+
+      expect(Review.all.count).to eq(3)
+
+      click_link "Delete Shelter"
+      expect(Review.all.count).to eq(0)
+    end
   end
 end
