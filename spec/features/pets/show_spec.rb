@@ -111,5 +111,32 @@ describe "As a visitor" do
 
         expect(page).to have_content("This pet has no open applications yet!")
     end
+
+    it 'When a pet has approved applications, they cannot be deleted.' do
+
+      application_1 = Application.create!({
+        user_id: @user_1.id,
+        description: nil,
+        application_status: "Approved"
+        })
+
+      petapp_2 = PetApplication.create!(
+        application_id: "#{application_1.id}",
+        pet_id: "#{@pet_1.id}",
+        approval: "Approved"
+      )
+
+      petapp_3 = PetApplication.create!(
+        application_id: "#{application_1.id}",
+        pet_id: "#{@pet_2.id}",
+        approval: "Approved"
+      )
+
+      visit "/pets/#{@pet_2.id}"
+
+      click_link "Delete Pet"
+      expect(page).to have_content("Cannot delete a pet with approved applications!")
+  
+    end
   end
 end

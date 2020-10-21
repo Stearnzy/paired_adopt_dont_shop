@@ -16,9 +16,9 @@ class Application < ApplicationRecord
     User.find(self.user_id)
   end
   
-  def all_approved?
-    require "pry"; binding.pry
-  end
+  # def all_approved?
+  #   require "pry"; binding.pry
+  # end
 
   # def adoptify
   #   self.pets.each do |pet|
