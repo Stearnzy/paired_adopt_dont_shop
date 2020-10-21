@@ -266,7 +266,6 @@ describe "As a visitor" do
       )
 
     visit "/shelters/#{@shelter.id}"
-
       within "#app-count" do
         expect(page).to have_content("Total Applications: 2")
       end
@@ -276,6 +275,33 @@ describe "As a visitor" do
       within "#app-count" do
         expect(page).to have_content("Total Applications: 1")
       end
+    end
+
+    it "If a shelter has approved applications for any of their pets I cannot
+        delete that shelter" do
+
+      application_1 = Application.create!({
+        user_id: @user.id,
+        description: nil,
+        application_status: "Pending"
+        })
+
+      petapp_2 = PetApplication.create!(
+        application_id: "#{application_1.id}",
+        pet_id: "#{@pet_2.id}",
+        approval: "Approved"
+      )
+
+      petapp_3 = PetApplication.create!(
+        application_id: "#{application_1.id}",
+        pet_id: "#{@pet_3.id}",
+        approval: "Pending"
+      )
+
+      visit "/shelters/#{@shelter.id}"
+
+      click_link "Delete Shelter"
+      expect(page).to have_content("Cannot delete shelter with pending applications!")
     end
   end
 end

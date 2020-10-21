@@ -12,9 +12,15 @@ class Shelter < ApplicationRecord
   end
 
   def application_count
-    shelter_pets = Pet.where(shelter_id: self.id)
-    apps_per_pet = shelter_pets.map {|pet| pet.applications.count}
-    apps_per_pet.sum
+    apps_per_shelter.count
   end
 
+  def any_pending_applications?
+    apps_per_shelter.flatten.any?{ |app| app.application_status == "Pending" }
+  end
+
+  def apps_per_shelter
+    shelter_pets = Pet.where(shelter_id: self.id)
+    apps_per_shelter = shelter_pets.map {|pet| pet.applications}
+  end
 end
