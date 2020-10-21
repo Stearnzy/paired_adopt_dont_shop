@@ -7,4 +7,12 @@ class Pet < ApplicationRecord
   # def toggle_adopt
   #   self.adoptable = false
   # end
+
+  def any_approved_applications?
+    self.applications.any?{|app| app.application_status == "Approved"}
+  end
+
+  # def apps_per_pet
+  #   Application.find_by(params[:id])
+  # end
 end
