@@ -9,7 +9,7 @@ class Pet < ApplicationRecord
   # end
 
   def any_approved_applications?
-    self.applications.any?{|app| app.application_status == "Approved"}
+    applications.any?{|app| app.application_status == "Approved"}
   end
 
   # def apps_per_pet
