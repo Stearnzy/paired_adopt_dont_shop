@@ -12,8 +12,9 @@ class Shelter < ApplicationRecord
   end
 
   def application_count
-    # shelter_apps = PetApplication.where(pet_id: )
-
+    shelter_pets = Pet.where(shelter_id: self.id)
+    apps_per_pet = shelter_pets.map {|pet| pet.applications.count}
+    apps_per_pet.sum
   end
 
 end
