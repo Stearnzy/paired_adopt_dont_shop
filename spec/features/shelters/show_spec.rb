@@ -268,13 +268,13 @@ describe "As a visitor" do
     visit "/shelters/#{@shelter.id}"
 
       within "#app-count" do
-        expect(page).to have_content("Active Applications: 2")
+        expect(page).to have_content("Total Applications: 2")
       end
 
     visit "/shelters/#{@shelter_2.id}"
 
       within "#app-count" do
-        expect(page).to have_content("Active Applications: 1")
+        expect(page).to have_content("Total Applications: 1")
       end
     end
   end
