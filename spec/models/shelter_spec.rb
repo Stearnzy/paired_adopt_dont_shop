@@ -145,6 +145,5 @@ describe Shelter, type: :model do
     )
 
     expect(shelter_1.application_count).to eq(2)
-  
   end
 end
