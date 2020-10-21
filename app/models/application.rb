@@ -15,4 +15,15 @@ class Application < ApplicationRecord
    def retrieve_user
     User.find(self.user_id)
   end
+  
+  def all_approved?
+    require "pry"; binding.pry
+  end
+
+  # def adoptify
+  #   self.pets.each do |pet|
+  #     pet.toggle_adopt
+  #   end
+  #   require "pry"; binding.pry
+  # end
 end

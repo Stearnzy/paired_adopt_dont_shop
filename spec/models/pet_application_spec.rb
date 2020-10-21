@@ -45,7 +45,7 @@ RSpec.describe PetApplication, type: :model do
       approval: "Pending"
     )
 
-    expect(petapp_1.retrieve_name).to eq("Lizzie")
+    expect(petapp_1.retrieve_pet_name).to eq("Lizzie")
   end
-  
+
 end

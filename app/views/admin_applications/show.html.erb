@@ -1,10 +1,17 @@
 <h1>Application for <%= @application.user.name %></h1>
 
-<% @pet_app.each do |app| %>
+<% if @all_apps.all?{|app| app.approval == "Approved"} %>
+    <h2>Application Approved</h2>
+<% elsif @all_apps.any?{|app| app.approval == "Rejected"} %>
+    <h2>Application Rejected</h2>
+<% end %>
 
-<section>
-  <%= app.retrieve_name %>
-    <% if app.approval == "Pending"  %>
+<% @all_apps.each do |app| %>
+<section id="pet-app-<%= app.id %>">
+  <%= app.retrieve_pet_name %>
+    <% if app.approval == "Pending" && app.pet_adoptable? == false %>
+      <p>This pet has already been approved for adoption.</p>
+    <% elsif app.approval == "Pending" && app.pet_adoptable?  %>
       <%= button_to 'Approve Pet', "/admin/applications/#{@application.id}", method: 'patch', params: { key: app.pet_id, value: :approve } %>
       <%= button_to 'Reject Pet', "/admin/applications/#{@application.id}", method: 'patch', params: { key: app.pet_id, value: :reject } %>
     <% elsif app.approval == "Approved" %>

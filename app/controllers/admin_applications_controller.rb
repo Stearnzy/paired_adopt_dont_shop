@@ -1,23 +1,33 @@
 class AdminApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
-    @pet_app = PetApplication.where(application_id: @application.id)
+    @all_apps = PetApplication.where(application_id: @application.id)
   end
 
   def update
-    application = Application.find(params[:id])
-    @pet_app = PetApplication.find_by(pet_id: [params[:key]])
+    @application = Application.find(params[:id])
+    @all_apps = PetApplication.where(application_id: @application.id)
+    @pet_app = PetApplication.find_by(pet_id: [params[:key]], application_id: @application.id)
 
     if params[:value] == "approve"
       @pet_app.update({
         approval: "Approved"
         })
-      redirect_to "/admin/applications/#{application.id}"
+      redirect_to "/admin/applications/#{@application.id}"
     elsif params[:value] == "reject"
       @pet_app.update({
         approval: "Rejected"
         })
-      redirect_to "/admin/applications/#{application.id}"
+      redirect_to "/admin/applications/#{@application.id}"
+    end
+
+    if @all_apps.all?{|app| app.approval == "Approved"}
+      @application.application_status = "Approved"
+      @application.pets.each do |pet|
+        pet.toggle!(:adoptable)
+      end
+    elsif @all_apps.any?{|app| app.approval == "Rejected"}
+      @application.application_status = "Rejected"
     end
   end
 end
