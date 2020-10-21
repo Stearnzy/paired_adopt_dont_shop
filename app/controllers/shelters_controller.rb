@@ -50,7 +50,7 @@ class SheltersController < ApplicationController
     if @shelter.any_pending_applications?
       flash.now[:notice] = "Cannot delete shelter with pending applications!"
       render :show
-    else
+    elsif @shelter.pets.count == 0 || @shelter.all_pets_adoptable?
       Shelter.destroy(params[:id])
       redirect_to '/shelters'
     end
