@@ -4,10 +4,6 @@ class Application < ApplicationRecord
   has_many :pet_applications
   has_many :pets, through: :pet_applications
 
-  def pet_ids
-    self.pets.map {|pet| pet.id}
-  end
-
   def find_pet_apps
     PetApplication.where(pet_id: self.pet_ids)
   end

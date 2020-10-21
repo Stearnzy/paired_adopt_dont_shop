@@ -121,7 +121,11 @@ describe Shelter, type: :model do
     expect(@shelter_1.all_pets_adoptable?).to eq(true)
   end
 
+<<<<<<< HEAD
   it "can show all Applications for any pets in the shelter" do
     expect(@shelter_1.apps_per_shelter).to eq([@application_1, @application_2])
+=======
+    expect(shelter_1.application_count).to eq(2)
+>>>>>>> e3986a935dbe1370d7d39244fc17e3cce731823a
   end
 end

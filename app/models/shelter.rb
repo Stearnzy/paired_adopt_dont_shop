@@ -17,10 +17,13 @@ class Shelter < ApplicationRecord
 
   def any_pending_applications?
     apps_per_shelter.any?{ |app| app.application_status == "Pending" }
+<<<<<<< HEAD
   end
 
   def all_pets_adoptable?
     self.pets.all?{ |pet| pet.adoptable == true }
+=======
+>>>>>>> e3986a935dbe1370d7d39244fc17e3cce731823a
   end
 
   def apps_per_shelter
