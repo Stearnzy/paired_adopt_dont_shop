@@ -21,6 +21,25 @@ describe "As a visitor" do
         shelter_id: "#{@shelter.id}"
         })
 
+      @user_1 = User.create({
+        name: 'Bobby',
+        street_address: '123 fake st.',
+        city: 'Fakertown',
+        state: 'CO',
+        zip: '80205'
+      })
+
+      @application_1 = Application.create(
+        user_id: "#{@user_1.id}",
+        application_status: 'In Progress',
+      )
+
+      @petapp_1 = PetApplication.create!(
+        application_id: "#{@application_1.id}",
+        pet_id: "#{@pet_1.id}",
+        approval: "Pending"
+      )
+
     end
 
     it "I see the pet with that id including image, name, description,
@@ -60,5 +79,19 @@ describe "As a visitor" do
       expect(page).to have_link("To Pets Index")
       expect(page).to have_link("To Shelters Index")
     end
+
+    it "I see a link to view all applications for this pet
+      When I click that link
+      I can see a list of all the names of applicants for this pet
+      Each applicants name is a link to the application's show page" do 
+      visit "/pets/#{@pet_1.id}"
+
+      expect(page).to have_link("View Applications")
+
+      click_on("View Application")
+
+      expect(page).to have_content("#{@user_1.name} Application")  
+
+      end
   end
 end

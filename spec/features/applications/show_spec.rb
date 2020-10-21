@@ -48,8 +48,7 @@ describe "As a visitor" do
 
       @application_1 = Application.create(
         user_id: @user_1.id,
-        application_status: 'In Progress',
-        pets: []
+        application_status: 'In Progress'
       )
     end
       it "Then I can see the following:
@@ -61,17 +60,20 @@ describe "As a visitor" do
 
       petapp_1 = PetApplication.create!(
         application_id: @application_1.id,
-        pet_id: @pet_1.id
+        pet_id: @pet_1.id,
+        approval: "Pending"
       )
 
       petapp_2 = PetApplication.create!(
         application_id: @application_1.id,
-        pet_id: @pet_2.id
+        pet_id: @pet_2.id,
+        approval: "Pending"
       )
 
       petapp_3 = PetApplication.create!(
         application_id: @application_1.id,
-        pet_id: @pet_3.id
+        pet_id: @pet_3.id,
+        approval: "Pending"
       )
 
       visit "/applications/#{@application_1.id}"

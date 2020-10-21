@@ -1,3 +1,0 @@
-class AdminApplication < ApplicationRecord
-
-end

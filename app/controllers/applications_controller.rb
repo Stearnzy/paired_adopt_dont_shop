@@ -17,11 +17,12 @@ class ApplicationsController < ApplicationController
     @application = Application.new({
       user_id: @user.id,
       description: nil,
-      application_status: "In Progress",
-      pets: []
+      pets: [],
+      application_status: "In Progress"
     })
 
     @application.save
+
     redirect_to "/applications/#{@application.id}"
   end
 
@@ -36,7 +37,6 @@ class ApplicationsController < ApplicationController
 
   def update
     @application = Application.find(params[:id])
-
     if params[:description] == ""
       flash.now[:notice] = "Submission failed - must enter why you would make a good owner."
       render :show
