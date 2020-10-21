@@ -74,7 +74,7 @@ describe "As a visitor" do
       expect(page).to have_link("Delete")
     end
 
-    xit "When I click delete, pet is deleted and redirected to pet index" do
+    it "When I click delete, pet is deleted and redirected to pet index" do
       visit "/pets/#{@pet_1.id}"
 
       click_on "Delete Pet"

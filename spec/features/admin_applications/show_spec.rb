@@ -83,7 +83,7 @@ describe "As a visitor" do
       #   })
 
       @petapp_1 = PetApplication.create!(
-        application_id: "#{@application_1.id}",
+        application_id: "#{@application_2.id}",
         pet_id: "#{@pet_1.id}",
         approval: "Pending"
       )
@@ -101,7 +101,7 @@ describe "As a visitor" do
       )
 
       @petapp_4 = PetApplication.create!({
-        application_id: "#{@application_2.id}",
+        application_id: "#{@application_1.id}",
         pet_id: "#{@pet_1.id}",
         approval: "Pending"
         })
@@ -165,18 +165,19 @@ describe "As a visitor" do
       expect(page).to have_content("Application Rejected")
     end
 
-    xit "When a pet has an Approved app on them and I visit the admin show page of
+    it "When a pet has an Approved app on them and I visit the admin show page of
         another application that is pending on the same pet, I do not see a button
         next to the pet.  Instead I see a message that this pet has been approved" do
+
       visit "/admin/applications/#{@application_2.id}"
 
-      within "#pet-app-#{@petapp_4.id}" do
+      within "#pet-app-#{@petapp_1.id}" do
         click_button "Approve Pet"
       end
 
       visit "/admin/applications/#{@application_1.id}"
 
-      within "#pet-app-#{@petapp_1.id}" do
+      within "#pet-app-#{@petapp_4.id}" do
         expect(page).to_not have_button("Approve Pet")
         expect(page).to_not have_button("Reject Pet")
         expect(page).to have_content("This pet has already been approved for adoption.")
