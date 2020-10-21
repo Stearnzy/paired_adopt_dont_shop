@@ -21,7 +21,7 @@ describe "As a visitor" do
         })
     end
 
-    it "When I click the link I am taken to '/pets/:id/edit' where I see a form" do
+    xit "When I click the link I am taken to '/pets/:id/edit' where I see a form" do
       visit "/pets/#{@pet.id}"
 
       expect(page).to have_link("Update Pet")
