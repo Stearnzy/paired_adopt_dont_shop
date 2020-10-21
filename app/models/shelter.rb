@@ -16,11 +16,16 @@ class Shelter < ApplicationRecord
   end
 
   def any_pending_applications?
-    apps_per_shelter.flatten.any?{ |app| app.application_status == "Pending" }
+    apps_per_shelter.any?{ |app| app.application_status == "Pending" }
+  end
+
+  def all_pets_adoptable?
+    self.pets.all?{ |pet| pet.adoptable == true }
   end
 
   def apps_per_shelter
     shelter_pets = Pet.where(shelter_id: self.id)
     apps_per_shelter = shelter_pets.map {|pet| pet.applications}
+    apps_per_shelter.flatten
   end
 end
