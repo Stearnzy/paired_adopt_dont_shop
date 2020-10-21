@@ -8,11 +8,12 @@ class Shelter < ApplicationRecord
   end
 
   def review_average
-    
+    reviews.average(:rating)
   end
 
   def application_count
-    
+    # shelter_apps = PetApplication.where(pet_id: )
+
   end
-  
+
 end

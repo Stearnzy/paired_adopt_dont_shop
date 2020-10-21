@@ -11,6 +11,14 @@ describe "As a visitor" do
         zip: "80110"
         })
 
+      @shelter_2 = Shelter.create({
+        name: "Dog's Haven",
+        address: "444 Dog Park Rd.",
+        city: "Denver",
+        state: "CO",
+        zip: "80110"
+        })
+
       @user = User.create({
         name: 'Bobby',
         street_address: '123 fake st.',
@@ -25,11 +33,11 @@ describe "As a visitor" do
         description: "Floppy-eared dude ready to play ball!",
         age: 3,
         sex: "male",
-        shelter_id: "#{@shelter.id}"
+        shelter_id: "#{@shelter_2.id}"
       })
 
       @pet_2 = Pet.create({
-        image: "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074__340.jpg",
+        image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ktvb.com%2Farticle%2Fentertainment%2Fplaces%2Fidaho-life%2Fidaho-life-boise-woman-finds-niche-as-pho-dog-grapher%2F277-d6456b15-6b2a-4bad-9b25-eeb58faf1323&psig=AOvVaw3hm5tZEVkZl17MKIwo9X_I&ust=1603338603299000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCODUzvHjxOwCFQAAAAAdAAAAABAD",
         name: "Nena",
         description: "She is always ready to share some of your food!",
         age: 10,
@@ -37,11 +45,14 @@ describe "As a visitor" do
         shelter_id: "#{@shelter.id}"
       })
 
-      # @petapp_1 = PetApplication.create!(
-      #   application_id: "#{@application_1.id}",
-      #   pet_id: "#{@pet_1.id}",
-      #   approval: "Pending"
-      # )
+      @pet_3 = Pet.create({
+        image: 'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg',
+        name: "Garfield",
+        description: "Ready and willing to eat your lasagna.",
+        age: 13,
+        sex: "male",
+        shelter_id: "#{@shelter.id}"
+        })
     end
 
     it "I see the shelter with that id including the shelter's
@@ -176,45 +187,87 @@ describe "As a visitor" do
         expect(page).to_not have_content("#{review.picture}")
     end
 
-    it 'I see statistics for that shelter, including:
-        - count of pets that are at that shelter
-        - average shelter review rating
-        - number of applications on file for that shelter' do
-        
-    review_1 = Review.create!({
-      user_name: "Bobby",
-      title: "Love this place",
-      rating: 5,
-      content: "Great staff all around",
-      shelter_id: "#{@shelter.id}",
-      user_id: "#{@user.id}"
-      })
+    it "I see statistics for that shelter, including:
+        - count of pets that are at that shelter" do
+      visit "/shelters/#{@shelter.id}"
 
-    review_2 = Review.create!({
-      user_name: "Bobby",
-      title: "Dogs are OK",
-      rating: 2,
-      content: "One peed on my leg",
-      shelter_id: "#{@shelter.id}",
-      user_id: "#{@user.id}"
-      })
+      within "#count" do
+        expect(page).to have_content("Number of Pets: #{@shelter.pet_count}")
+      end
+    end
 
-    review_3 = Review.create!({
-      user_name: "Bobby",
-      title: "Bird crap everywhere",
-      rating: 1,
-      content: "Worst ever.",
-      shelter_id: "#{@shelter.id}",
-      user_id: "#{@user.id}"
-      })
-    
-    visit "/shelters/#{@shelter.id}"
+    it "I see the average shelter review rating" do
+      review_1 = Review.create!({
+        user_name: "Bobby",
+        title: "Great customer service",
+        rating: 5,
+        picture: "https://face4pets.org/wp-content/uploads/2015/06/shelter-cat2.jpg",
+        content: "Great staff all around",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+        })
 
-    within "#count" do
-      expect(page).to have_content("Number of Pets: #{@shelter.pet_count}")  
-    # expect(page).to have_content("#{@shelter.review_average}")  
-    # expect(page).to have_content("#{@shelter.application_count}")  
-      end 
+      review_2 = Review.create!({
+        user_name: "Bobby",
+        title: "Clean up a little",
+        rating: 4,
+        picture: 'https://www.treehugger.com/thmb/69yZbhJR6bzhORevUYoLRX_pHSQ=/640x480/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2016__04__IMG_4146-6db7307bdc4447d0bd152df2c5d4c68b.JPG',
+        content: "Some litter spots in areas.  Not bad though!",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+        })
+
+      review_3 = Review.create!({
+        user_name: "Bobby",
+        title: "Beautiful cats",
+        rating: 4,
+        picture: 'https://cdn.omlet.co.uk/images/originals/Cat-Cat_Guide-A_litter_of_six_black_and_white_kittens.jpg',
+        content: "Gorgeous kittens!",
+        shelter_id: "#{@shelter.id}",
+        user_id: "#{@user.id}"
+        })
+
+      visit "/shelters/#{@shelter.id}"
+
+      within "#avg-customer-reviews" do
+        expect(page).to have_content("Average Customer Reviews: 4.3")
+      end
+    end
+
+    it "I see the number of applications on file for that shelter" do
+      application_1 = Application.create!({
+        user_id: @user.id,
+        description: nil,
+        application_status: "In Progress"
+        })
+
+      application_2 = Application.create!({
+        user_id: @user.id,
+        description: nil,
+        application_status: "In Progress"
+        })
+
+      petapp_2 = PetApplication.create!(
+        application_id: "#{application_2.id}",
+        pet_id: "#{@pet_1.id}",
+        approval: "Pending"
+      )
+
+      petapp_2 = PetApplication.create!(
+        application_id: "#{application_1.id}",
+        pet_id: "#{@pet_2.id}",
+        approval: "Pending"
+      )
+
+      petapp_3 = PetApplication.create!(
+        application_id: "#{application_1.id}",
+        pet_id: "#{@pet_3.id}",
+        approval: "Pending"
+      )
+require "pry"; binding.pry
+      within "#app-count" do
+        expect(page).to have_content("Active Applications: 2")
+      end
     end
   end
 end
