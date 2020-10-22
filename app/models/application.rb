@@ -15,5 +15,17 @@ class Application < ApplicationRecord
    def retrieve_user
     User.find(self.user_id)
   end
+
+  def approve_or_reject
+    # require 'pry'; binding.pry
+    if pet_applications.where.not(approval: "Approved").empty?
+      application_status = "Approved"
+      pets.each do |pet|
+        pet.toggle!(:adoptable)
+      end
+    elsif pet_applications.where(approval: "Rejected").any?
+      application_status = "Rejected"
+    end
+  end
   
 end
