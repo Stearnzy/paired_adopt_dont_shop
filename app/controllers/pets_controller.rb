@@ -9,14 +9,14 @@ class PetsController < ApplicationController
 
   def create
     pet = Pet.create({
-      image: params[:image],
-      name: params[:name],
-      description: params[:description],
-      age: params[:age],
-      sex: params[:sex],
-      shelter_id: params[:shelter_id],
-      adoptable: true
-      })
+                       image: params[:image],
+                       name: params[:name],
+                       description: params[:description],
+                       age: params[:age],
+                       sex: params[:sex],
+                       shelter_id: params[:shelter_id],
+                       adoptable: true
+                     })
 
     pet.save
 
@@ -34,13 +34,13 @@ class PetsController < ApplicationController
   def update
     pet = Pet.find(params[:id])
     pet.update({
-      image: params[:pet][:image],
-      name: params[:pet][:name],
-      description: params[:pet][:description],
-      age: params[:pet][:age],
-      sex: params[:pet][:sex],
-      shelter_id: params[:pet][:shelter_id]
-      })
+                 image: params[:pet][:image],
+                 name: params[:pet][:name],
+                 description: params[:pet][:description],
+                 age: params[:pet][:age],
+                 sex: params[:pet][:sex],
+                 shelter_id: params[:pet][:shelter_id]
+               })
 
     redirect_to "/pets/#{pet.id}"
   end
@@ -48,11 +48,11 @@ class PetsController < ApplicationController
   def destroy
     @pet = Pet.find(params[:id])
     if @pet.any_approved_applications?
-      flash.now[:notice] = "Cannot delete a pet with approved applications!"
+      flash.now[:notice] = 'Cannot delete a pet with approved applications!'
       render :show
     else
       Pet.destroy(params[:id])
-      redirect_to "/pets"
+      redirect_to '/pets'
     end
   end
 end

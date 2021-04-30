@@ -27,5 +27,5 @@ class Application < ApplicationRecord
       application_status = "Rejected"
     end
   end
-  
+
 end
